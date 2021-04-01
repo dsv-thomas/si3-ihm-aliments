@@ -4,32 +4,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
 public class ProducerFragment extends Fragment {
 
-    private ProducerViewModel producerViewModel;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        producerViewModel =
-                new ViewModelProvider(this).get(ProducerViewModel.class);
         View root = inflater.inflate(R.layout.fragment_producer, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        producerViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+
+        ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
+        ListView listView = root.findViewById(R.id.listViewProducer);
+        listView.setAdapter(producerAdapter);
         return root;
     }
 }
