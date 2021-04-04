@@ -1,6 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ public class ProducerAdapter extends BaseAdapter {
     private static LayoutInflater mInflater = null; // Un mécanisme pour gérer l'affichage graphique depuis un layout XML
     private Context contexte;
     private List<Producer> listView;
+    private IProducerAdapterListener listener;
 
     public ProducerAdapter(Context contexte, List listView) {
         this.listView = listView;
@@ -49,39 +51,29 @@ public class ProducerAdapter extends BaseAdapter {
         TextView nom = maVue.findViewById(R.id.nameProducer);
         TextView place = maVue.findViewById(R.id.placeProducer);
         TextView pNumber = maVue.findViewById(R.id.PnumberProducer);
-        ImageView imageView = maVue.findViewById(R.id.avatarProducer);
+        ImageView imageView = maVue.findViewById(R.id.avatarProducer); //TODO: image
 
 
         //imageView.setImageResource(); //TODO: Profile picture
         nom.setText(listView.get(position).getName());
         place.setText(listView.get(position).getPlace());
         pNumber.setText(listView.get(position).getpNumber());
-/*
-        maVue.setOnClickListener(new View.OnClickListener() { //TODO: Listener
+
+        maVue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (Integer)v.getTag();
-                sendListener(new ListOfDiplomas().get(position).getMainTeacher(), position);
-            }
+                Log.d("ADAPTER","position="+position+"listener"+ listener);
 
+                if (listener!=null) listener.onClickProducer(position);
+
+            }
         });
-*/
+
         return maVue;
     }
-/*
-    public interface ITeacherAdapterListener {
-        void onClickNom(Teacher teacher, int position);
-    }
 
-    // Abonnement pour click sur le nom... //TODO:
-    private List<ITeacherAdapterListener> mListListener = new ArrayList<>();
-    public void addListener(ITeacherAdapterListener aListener) {
-        mListListener.add(aListener);
+
+    public void addListener(IProducerAdapterListener aListener) {
+        listener = aListener;
     }
-    private void sendListener(Teacher item, int position) {
-        for(int i = mListListener.size()-1; i >= 0; i--) {
-            mListListener.get(i).onClickNom(item, position);
-        }
-    }
-*/
 }
