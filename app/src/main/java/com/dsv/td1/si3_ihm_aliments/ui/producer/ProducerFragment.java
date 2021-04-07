@@ -32,5 +32,4 @@ public class ProducerFragment extends Fragment {
     }
 
 
-
 }

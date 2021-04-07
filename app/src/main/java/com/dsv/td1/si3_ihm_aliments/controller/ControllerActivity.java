@@ -2,6 +2,8 @@ package com.dsv.td1.si3_ihm_aliments.controller;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,7 +25,7 @@ public class ControllerActivity extends AppCompatActivity implements IProducerAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("CONTROLLERACTIVITY","nb observers="+Model_Producer.getInstance().countObservers());
+        Log.d("CONTROLLERACTIVITY", "nb observers=" + Model_Producer.getInstance().countObservers());
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -33,21 +35,36 @@ public class ControllerActivity extends AppCompatActivity implements IProducerAd
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-
-
-
     }
 
     @Override
     public void onClickProducer(int position) {
-        Log.d("CONTROLLER2","position="+position);
+        Log.d("CONTROLLER", "position=" + position);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.nav_host_fragment, new ProducerDescriptionFragment(Model_Producer.getInstance().getProducerList().get(position)));
+        ft.addToBackStack(null);
         ft.commit();
-
-
     }
 
+    /**
+     * ACTIONS
+     *
+     * @Override public void onButtonClicked(int action) {
+     * Log.d("CONTROLLER","callback() -->  action="+action);
+     * switch (action) {
+     * case BACK :  Log.d("CONTROLLER","TEST"); break;
+     * }
+     * }
+     */
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
 }

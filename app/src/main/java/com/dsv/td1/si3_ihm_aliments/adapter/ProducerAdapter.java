@@ -53,7 +53,6 @@ public class ProducerAdapter extends BaseAdapter {
         TextView pNumber = maVue.findViewById(R.id.PnumberProducer);
         ImageView imageView = maVue.findViewById(R.id.avatarProducer); //TODO: image
 
-
         //imageView.setImageResource(); //TODO: Profile picture
         nom.setText(listView.get(position).getName());
         place.setText(listView.get(position).getPlace());
@@ -68,10 +67,8 @@ public class ProducerAdapter extends BaseAdapter {
 
             }
         });
-
         return maVue;
     }
-
 
     public void addListener(IProducerAdapterListener aListener) {
         listener = aListener;
