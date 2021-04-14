@@ -3,4 +3,7 @@
     <string name="title_producer">Producteur</string>
     <string name="title_map">Carte</string>
     <string name="title_profile">Profil</string>
+    <string name="intro">Se connecter en tant que ... </string>
+    <string name="intro_producteur">Producteur</string>
+    <string name="intro_client">Client</string>
 </resources>

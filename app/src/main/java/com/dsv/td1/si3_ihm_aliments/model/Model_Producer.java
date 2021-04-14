@@ -1,5 +1,9 @@
 package com.dsv.td1.si3_ihm_aliments.model;
 
+import com.dsv.td1.si3_ihm_aliments.producer.Maraiche;
+import com.dsv.td1.si3_ihm_aliments.producer.Poissonnier;
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -19,8 +23,8 @@ public class Model_Producer extends Observable {
     private Model_Producer() {
         super();
         producerList.clear();
-        producerList.add(new Producer("Michel", "Rue de l'eau", "0985758452", true));
-        producerList.add(new Producer("Alex", "Chemin du palmier", "0954268522", false));
+        producerList.add(new Maraiche("Michel", "Rue de l'eau", "0985758452", true));
+        producerList.add(new Poissonnier("Alex", "Chemin du palmier", "0954268522", false));
     }
 
     public void add(Producer producer) {
