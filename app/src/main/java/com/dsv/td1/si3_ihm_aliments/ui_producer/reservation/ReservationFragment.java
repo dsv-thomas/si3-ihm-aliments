@@ -1,6 +1,5 @@
 package com.dsv.td1.si3_ihm_aliments.ui_producer.reservation;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +19,13 @@ public class ReservationFragment extends androidx.fragment.app.Fragment {
 
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
-            View root = inflater.inflate(R.layout.fragment_stock, container, false);
+            View root = inflater.inflate(R.layout.fragment_stock_producer, container, false);
 
             ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
-            //ListView listView = root.findViewById(R.id.listViewProduct);
-            //listView.setAdapter(producerAdapter);
+         //   ListView listView = root.findViewById(R.id.listViewProduct);
+          //  listView.setAdapter(producerAdapter);
 
-            producerAdapter.addListener((IProducerAdapterListener) getContext());
+      //      producerAdapter.addListener((IProducerAdapterListener) getContext());
             return root;
         }
 

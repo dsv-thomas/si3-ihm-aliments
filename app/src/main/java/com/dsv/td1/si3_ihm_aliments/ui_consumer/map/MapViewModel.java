@@ -1,4 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui.map;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.map;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

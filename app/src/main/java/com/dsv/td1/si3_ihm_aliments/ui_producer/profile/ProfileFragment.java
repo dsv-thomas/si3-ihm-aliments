@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.ui.profile.ProfileViewModel;
+import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileViewModel;
 
 public class ProfileFragment extends Fragment {
 

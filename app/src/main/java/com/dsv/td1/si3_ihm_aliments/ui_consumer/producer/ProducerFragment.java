@@ -1,7 +1,6 @@
-package com.dsv.td1.si3_ihm_aliments.ui.producer;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.producer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public class ProducerFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_producer, container, false);
+        View root = inflater.inflate(R.layout.fragment_producer_consumer, container, false);
 
         ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
         ListView listView = root.findViewById(R.id.listViewProducer);

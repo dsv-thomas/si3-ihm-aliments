@@ -1,4 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui.map;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.map;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -55,7 +55,7 @@ public class MapFragment extends Fragment {
         mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
 
 
-        View root = inflater.inflate(R.layout.fragment_map, container, false);
+        View root = inflater.inflate(R.layout.fragment_map_consumer, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

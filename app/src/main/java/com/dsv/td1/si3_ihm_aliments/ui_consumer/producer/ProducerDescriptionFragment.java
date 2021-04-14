@@ -1,4 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui.producer;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.producer;
 
 import android.os.Bundle;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui.profile;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,7 +21,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        View root = inflater.inflate(R.layout.fragment_profile_consumer, container, false);
         final TextView textView = root.findViewById(R.id.text_notifications);
         profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
