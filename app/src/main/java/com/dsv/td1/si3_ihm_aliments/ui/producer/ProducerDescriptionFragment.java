@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.model.Producer;
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 
 public class ProducerDescriptionFragment extends Fragment {

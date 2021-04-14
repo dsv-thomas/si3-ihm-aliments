@@ -1,6 +1,6 @@
-package com.dsv.td1.si3_ihm_aliments.model;
+package com.dsv.td1.si3_ihm_aliments.producer;
 
-public class Producer {
+public abstract class Producer {
     private String name;
     private String place;
     private String pNumber;

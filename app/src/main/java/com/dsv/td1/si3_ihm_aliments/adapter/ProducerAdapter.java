@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.model.Producer;
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.util.List;
 
