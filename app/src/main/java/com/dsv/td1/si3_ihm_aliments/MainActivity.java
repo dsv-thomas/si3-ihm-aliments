@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.dsv.td1.si3_ihm_aliments.controller.ControllerActivity;
+import com.dsv.td1.si3_ihm_aliments.controller.ControllerProducerActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),ControllerActivity.class);
             startActivity(intent);
         });
-
+        findViewById(R.id.start_producteur).setOnClickListener(click-> {
+            Intent intent = new Intent(getApplicationContext(), ControllerProducerActivity.class);
+            startActivity(intent);
+        });
     }
 
 }

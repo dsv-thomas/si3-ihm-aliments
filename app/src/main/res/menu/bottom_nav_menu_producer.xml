@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_reservation_producer"
+        android:icon="@drawable/ic_agriculture_black_18dp"
+        android:title="@string/title_reservation_producer" />
+
+    <item
+        android:id="@+id/navigation_stock"
+        android:icon="@drawable/ic_map_black_18dp"
+        android:title="@string/title_stock" />
+
+    <item
+        android:id="@+id/navigation_profile_producer"
+        android:icon="@drawable/ic_account_circle_black_18dp"
+        android:title="@string/title_profile" />
+
+</menu>

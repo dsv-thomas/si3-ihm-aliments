@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_stock">
+
+    <fragment
+        android:id="@+id/navigation_producer"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.reservation.ReservationFragment"
+        android:label="@string/title_reservation_producer"
+        tools:layout="@layout/fragment_reservation_producer" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragment"
+        android:label="@string/title_stock"
+        tools:layout="@layout/fragment_stock" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile_producer" />
+</navigation>
