@@ -1,5 +1,8 @@
 package com.dsv.td1.si3_ihm_aliments.model;
 
+import android.util.Log;
+
+import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
 import com.dsv.td1.si3_ihm_aliments.producer.Maraiche;
 import com.dsv.td1.si3_ihm_aliments.producer.Poissonnier;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
@@ -23,8 +26,13 @@ public class Model_Producer extends Observable {
     private Model_Producer() {
         super();
         producerList.clear();
+        MaraicheFactory maraicheFactory = new MaraicheFactory();
+
+        add(maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true));
+        add(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
         producerList.add(new Maraiche("Michel", "Rue de l'eau", "0985758452", true));
-        producerList.add(new Poissonnier("Alex", "Chemin du palmier", "0954268522", false));
+        Log.d("MODEL", "producerList=" +producerList.size());
+        Log.d("MODEL", "producerList=" + maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true).toString());
     }
 
     public void add(Producer producer) {
