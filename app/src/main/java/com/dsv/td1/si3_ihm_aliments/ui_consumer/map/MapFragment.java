@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,10 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -38,17 +35,14 @@ import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LOCATION_SERVICE;
+
 
 public class MapFragment extends Fragment {
     private static final int PERMISSION_FINE_LOCATION = 99;
-    //Location request
-    LocationRequest locationRequest;
-    //Google api for location
-    FusedLocationProviderClient fusedLocationProviderClient;
     IMapController mapController;
     private MapView map;
     private MapViewModel mapViewModel;
-    private GeoPoint currentLocation;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,53 +58,58 @@ public class MapFragment extends Fragment {
             }
         });
 
-        locationRequest = LocationRequest.create();
+        IMapController mapController;
 
-        locationRequest.setInterval(3000);
-        locationRequest.setFastestInterval(3000);
-
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-
-        updateGPS();
-
-        ItemizedOverlayWithFocus<OverlayItem> mMyLocationOverlay;
+        GPSTracker mGPS = new GPSTracker(getContext());
 
         assert getActivity() != null;
         map = root.findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);    //render
-        map.setBuiltInZoomControls(true);               // zoomable
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
         mapController = map.getController();
-        mapController.setZoom(17.0);
-        GeoPoint startPoint = currentLocation;
-        mapController.setCenter(startPoint);
+        mapController.setZoom(18.0);
 
-        /////// FIN AFFICHAGE MAP
+        LocationManager locationManager = (LocationManager) (getActivity().getSystemService(LOCATION_SERVICE));
 
-        return root;
-    }
-
-    private void updateGPS() {
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity().getApplicationContext());
         if (ActivityCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null) {
-                        Log.d("LOCATION", String.valueOf(location.getLatitude()));
-                        Log.d("LOCATION", String.valueOf(location.getLongitude()));
-                        currentLocation = new GeoPoint(location);
-                        mapController.setCenter(currentLocation);
-                        addOverlay(currentLocation);
-                    }
-                }
-            });
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 4000, mGPS);
+            GeoPoint startPoint = new GeoPoint(mGPS.getLocation().getLatitude(), mGPS.getLocation().getLongitude());
+            mapController.setCenter(startPoint);
+
         } else {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_FINE_LOCATION);
             }
         }
+
+        //create a new item to draw on the map
+        //your items
+        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+        OverlayItem home = new OverlayItem("F. Rallo", "nos bureaux", new GeoPoint(43.65020, 7.00517));
+        Drawable m = home.getMarker(0);
+        items.add(home); // Lat/Lon decimal degrees
+
+        //the Place icons on the map with a click listener
+        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getActivity().getApplicationContext(), items,
+                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                    @Override
+                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
+                        //do something
+                        return true;
+                    }
+                    @Override
+                    public boolean onItemLongPress(final int index, final OverlayItem item) {
+                        return false;
+                    }
+                });
+
+        mOverlay.setFocusItemsOnTap(true);
+        map.getOverlays().add(mOverlay);
+        /////// FIN AFFICHAGE MAP
+        return root;
     }
+
 
     private void addOverlay(GeoPoint geoPoint) {
         //create a new item to draw on the map
@@ -148,7 +147,6 @@ public class MapFragment extends Fragment {
         switch (requestCode) {
             case PERMISSION_FINE_LOCATION:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    updateGPS();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "This app requires permission to be granted in order to work properly", Toast.LENGTH_SHORT).show();
                 }

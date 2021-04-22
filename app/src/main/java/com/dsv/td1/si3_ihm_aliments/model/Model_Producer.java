@@ -30,7 +30,6 @@ public class Model_Producer extends Observable {
 
         add(maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true));
         add(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
-        producerList.add(new Maraiche("Michel", "Rue de l'eau", "0985758452", true));
         Log.d("MODEL", "producerList=" +producerList.size());
         Log.d("MODEL", "producerList=" + maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true).toString());
     }
