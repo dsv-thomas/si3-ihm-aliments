@@ -10,6 +10,7 @@
         android:id="@+id/listViewProducer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="170dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -27,7 +27,7 @@ public class StockDescriptionFragment extends androidx.fragment.app.Fragment{
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_producer_page, container, false);
+        View root = inflater.inflate(R.layout.activity_producer_section_consumer, container, false);
         TextView textView = root.findViewById(R.id.nameProducerPage);
         textView.setText(producer.getName());
         Log.d("PRODUCER", "position=" + producer);
