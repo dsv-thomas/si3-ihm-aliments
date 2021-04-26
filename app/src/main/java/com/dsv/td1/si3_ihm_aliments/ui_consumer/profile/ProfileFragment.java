@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
+import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 
 public class ProfileFragment extends Fragment {
@@ -26,10 +27,10 @@ public class ProfileFragment extends Fragment {
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
 
         ListView listView = root.findViewById(R.id.consumer_reservation);
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservation());
+        ReservationAdapter reservationAdapter = new ReservationAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
 
 
-        listView.setAdapter(productAdapter);
+        listView.setAdapter(reservationAdapter);
 
         //productAdapter.addListener((IConsumerAdapterListener) getContext());
         return root;

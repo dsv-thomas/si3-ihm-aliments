@@ -8,23 +8,24 @@ import java.util.List;
 public class Consumer {
     private String name;
 
-    private List<Product> reservation = new ArrayList<>();
+    private List<Reservation> reservations = new ArrayList<>();
+
 
     public Consumer(String name) {
         this.name = name;
     }
 
-    public Consumer(String name, List<Product> reservation) {
+    public Consumer(String name, List<Reservation> reservation) {
         this.name = name;
-        this.reservation = reservation;
+        this.reservations = reservation;
     }
 
-    public void addProduct(Product product) {
-        reservation.add(product);
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
     }
 
-    public List<Product> getReservation() {
-        return reservation;
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
     public String getName() {

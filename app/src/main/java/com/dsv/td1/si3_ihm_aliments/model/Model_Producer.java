@@ -6,6 +6,7 @@ import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
 import com.dsv.td1.si3_ihm_aliments.producer.Maraiche;
 import com.dsv.td1.si3_ihm_aliments.producer.Poissonnier;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
+import com.dsv.td1.si3_ihm_aliments.product.Poisson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public class Model_Producer extends Observable {
         add(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
         Log.d("MODEL", "producerList=" +producerList.size());
         Log.d("MODEL", "producerList=" + maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true).toString());
+
+        //producerList.get(0).getProposedProducts().add(new Poisson("Poisson4", "4", "4"));
     }
 
     public void add(Producer producer) {

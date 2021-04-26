@@ -3,9 +3,11 @@ package com.dsv.td1.si3_ihm_aliments.model;
 import android.util.Log;
 
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
+import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Poisson;
+import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +29,20 @@ public class Model_Consumer extends Observable {
         super();
         consumerList.clear();
 
-        add(new Consumer("Albert", List.of(new Poisson("Poisson1", "4", "4"))));
+        add(new Consumer("Albert"));
 
-
-        Log.d("MODEL", "producerList=" +consumerList.size());
     }
 
-    public void add(Consumer producer) {
-        consumerList.add(producer);
+    public void add(Consumer consumer) {
+        consumerList.add(consumer);
         setChanged();
-        notifyObservers(producer);
+        notifyObservers(consumer);
+    }
+
+    public void addProductForReservation(Consumer consumer, Reservation reservation) {
+        consumer.addReservation(reservation);
+        setChanged();
+        notifyObservers(consumer);
     }
 
 
