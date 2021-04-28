@@ -57,6 +57,7 @@ public class ReservationAdapter extends BaseAdapter {
         TextView id = maVue.findViewById(R.id.idReservation);
         TextView quantity = maVue.findViewById(R.id.quantityProductReservation);
         TextView place = maVue.findViewById(R.id.pickupPointReservation);
+        TextView date = maVue.findViewById(R.id.datePickupPointReservation);
         ImageView imageView = maVue.findViewById(R.id.imageProduct); //TODO: image
         Button button = maVue.findViewById(R.id.reservation); //TODO: ANNULER
 
@@ -64,7 +65,8 @@ public class ReservationAdapter extends BaseAdapter {
         nom.setText(listView.get(position).getProduct().getName());
         id.setText(listView.get(position).getId().toString());
         quantity.setText(String.valueOf(listView.get(position).getQuantity()));
-        place.setText(listView.get(position).getPickupPoint());
+        place.setText(listView.get(position).getPickupPoint().getPlace());
+        //date.setText((CharSequence) listView.get(position).getPickupPoint());
         //place.setText(listView.get(position).getPlace()); //TODO: place picture
 
 

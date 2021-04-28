@@ -11,9 +11,9 @@ public class Reservation {
     private Product product;
     private int quantity;
     private Date date;
-    private String pickupPoint;
+    private PickupPoint pickupPoint;
 
-    public Reservation(Consumer consumer, Product product, int quantity, String pickupPoint) {
+    public Reservation(Consumer consumer, Product product, int quantity, PickupPoint pickupPoint) {
         this.id = UUID.randomUUID();
         this.consumer = consumer;
         this.product = product;
@@ -43,7 +43,7 @@ public class Reservation {
         return date;
     }
 
-    public String getPickupPoint() {
+    public PickupPoint getPickupPoint() {
         return pickupPoint;
     }
 }

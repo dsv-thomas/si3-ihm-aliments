@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
@@ -21,10 +23,17 @@ public class ProductAdapter extends BaseAdapter {
     private Context contexte;
     private List<Product> listView;
     private IConsumerAdapterListener listener;
+    private Producer currentProducer;
 
     public ProductAdapter(Context contexte, List listView) {
         this.listView = listView;
         this.contexte = contexte;
+    }
+
+    public ProductAdapter(Context contexte, List listView, Producer currentProducer) {
+        this.contexte = contexte;
+        this.listView = listView;
+        this.currentProducer = currentProducer;
     }
 
     @Override
@@ -68,7 +77,7 @@ public class ProductAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.d("Réservation","position="+position+"listener"+ listener);
-                if(listener!=null) listener.onButtonShowPopupWindowClick(v, listView.get(position));
+                if(listener!=null) listener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
             }
         });
 

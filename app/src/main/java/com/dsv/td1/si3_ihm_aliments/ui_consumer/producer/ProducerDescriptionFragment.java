@@ -18,6 +18,8 @@ import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Poisson;
 
+import java.util.Arrays;
+
 
 public class ProducerDescriptionFragment extends Fragment {
 
@@ -33,14 +35,13 @@ public class ProducerDescriptionFragment extends Fragment {
         View root = inflater.inflate(R.layout.activity_producer_section_consumer, container, false);
         TextView textView = root.findViewById(R.id.nameProducerPage);
         textView.setText(producer.getName());
-        Log.d("PRODUCER", "position=" + producer);
 
         //
-        producer.addProducts(new Poisson("Poisson1", "4", "4"));
+        producer.addProducts(new Poisson("Poisson", "4", "4"));
         //
 
         ListView listView = root.findViewById(R.id.productsList);
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), producer.getProposedProducts());
+        ProductAdapter productAdapter = new ProductAdapter(getContext(), producer.getProposedProducts(), producer);
 
         productAdapter.addListener((IConsumerAdapterListener) getActivity());
 
