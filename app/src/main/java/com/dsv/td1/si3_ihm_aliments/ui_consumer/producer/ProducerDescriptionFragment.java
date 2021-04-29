@@ -1,7 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.ui_consumer.producer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +17,6 @@ import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Poisson;
 
-import java.util.Arrays;
-
 
 public class ProducerDescriptionFragment extends Fragment {
 
@@ -32,7 +29,8 @@ public class ProducerDescriptionFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_producer_section_consumer, container, false);
+        listener = (IProducerAdapterListener) getActivity();
+        View root = inflater.inflate(R.layout.fragment_profile_producer, container, false);
         TextView textView = root.findViewById(R.id.nameProducerPage);
         textView.setText(producer.getName());
 

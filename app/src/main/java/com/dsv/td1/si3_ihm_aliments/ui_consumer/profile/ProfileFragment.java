@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,17 +13,27 @@ import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 
 public class ProfileFragment extends Fragment {
+    IConsumerAdapterListener listener;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.activity_consumer_page, container, false);
+        View root = inflater.inflate(R.layout.fragment_profile_consumer, container, false);
+        listener = (IConsumerAdapterListener) getActivity();
         TextView textView = root.findViewById(R.id.nameConsumerPage);
+
+        Button button = root.findViewById(R.id.submitForm);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onSettingsClicked();
+            }
+        });
 
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
 
@@ -35,4 +46,6 @@ public class ProfileFragment extends Fragment {
         //productAdapter.addListener((IConsumerAdapterListener) getContext());
         return root;
     }
+
+
 }

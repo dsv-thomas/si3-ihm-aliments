@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -38,8 +39,8 @@ import java.util.ArrayList;
 import static android.content.Context.LOCATION_SERVICE;
 
 
-public class MapFragment extends Fragment {
-    private static final int PERMISSION_FINE_LOCATION = 99;
+public class MapFragment extends Fragment implements IPermissionRequest {
+
     IMapController mapController;
     private MapView map;
     private MapViewModel mapViewModel;
@@ -141,18 +142,7 @@ public class MapFragment extends Fragment {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_FINE_LOCATION:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "This app requires permission to be granted in order to work properly", Toast.LENGTH_SHORT).show();
-                }
-                break;
-        }
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

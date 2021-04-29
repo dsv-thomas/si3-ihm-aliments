@@ -24,6 +24,10 @@ public class Consumer {
         reservations.add(reservation);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<Reservation> getReservations() {
         return reservations;
     }
