@@ -1,22 +1,24 @@
 package com.dsv.td1.si3_ihm_aliments.consumer;
 
-import com.dsv.td1.si3_ihm_aliments.product.Product;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Consumer {
     private String name;
+    private UUID uuid;
 
     private List<Reservation> reservations = new ArrayList<>();
 
 
     public Consumer(String name) {
         this.name = name;
+        this.uuid = UUID.randomUUID();
     }
 
     public Consumer(String name, List<Reservation> reservation) {
         this.name = name;
+        this.uuid = UUID.randomUUID();
         this.reservations = reservation;
     }
 
@@ -24,8 +26,8 @@ public class Consumer {
         reservations.add(reservation);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public UUID getUuid() {
+        return uuid;
     }
 
     public List<Reservation> getReservations() {
@@ -34,5 +36,9 @@ public class Consumer {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

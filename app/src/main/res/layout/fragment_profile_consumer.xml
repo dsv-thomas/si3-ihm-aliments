@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/avatarConsumerEdit"
+        android:id="@+id/avatarConsumer"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginStart="36dp"

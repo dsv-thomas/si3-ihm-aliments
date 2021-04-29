@@ -41,6 +41,7 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragment;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragment;
+import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -182,8 +183,10 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void onSubmitSettingsClicked(Consumer consumer, Bundle bundle) {
-        consumer.setName(bundle.get("name").toString());
-        getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
+         consumer.setName(bundle.get("name").toString());
+        //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragment()).addToBackStack(null).commit();
     }
 
 
@@ -231,14 +234,16 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                     Toast.makeText(getApplicationContext(), "Write permission GRANTED", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Write permission NOT GRANTED", Toast.LENGTH_LONG).show();
-                } break;
+                }
+                break;
 
             case REQUEST_MEDIA_READ:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     Toast.makeText(getApplicationContext(), "Read permission GRANTED", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Read permission NOT GRANTED", Toast.LENGTH_LONG).show();
-                } break;
+                }
+                break;
             default:
                 break;
         }
