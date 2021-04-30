@@ -13,13 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
@@ -32,7 +28,7 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_profile_producer, container, false);
+        View root = inflater.inflate(R.layout.fragment_profile_producer_for_consumer, container, false);
         listener = (IProducerAdapterListener) getActivity();
         TextView textView = root.findViewById(R.id.nameProducerPage);
         ImageView imageView = root.findViewById(R.id.avatarProducer);
