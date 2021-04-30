@@ -6,5 +6,8 @@ public interface IProducerAdapterListener {
 
     void onClickProducer(int position);
 
+    void onSettingsClicked();
+
+
 //    void onButtonClicked(int action);
 }

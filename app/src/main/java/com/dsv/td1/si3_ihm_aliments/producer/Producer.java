@@ -1,13 +1,13 @@
 package com.dsv.td1.si3_ihm_aliments.producer;
 
+import com.dsv.td1.si3_ihm_aliments.User;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Producer {
-    private String name;
+public abstract class Producer extends User {
     private String place;
     private String pNumber;
     private boolean isBio;
@@ -16,14 +16,14 @@ public abstract class Producer {
 
 
     public Producer(String name, String place, String pNumber, boolean isBio) {
-        this.name = name;
+        super(name);
         this.place = place;
         this.pNumber = pNumber;
         this.isBio = isBio;
     }
 
     public Producer(String name, String place, String pNumber, boolean isBio, List<Product> proposedProducts) {
-        this.name = name;
+        super(name);
         this.place = place;
         this.pNumber = pNumber;
         this.isBio = isBio;
@@ -31,7 +31,7 @@ public abstract class Producer {
     }
 
     public Producer(String name, String place, String pNumber, boolean isBio, List<Product> proposedProducts, List<PickupPoint> pickupPoints) {
-        this.name = name;
+        super(name);
         this.place = place;
         this.pNumber = pNumber;
         this.isBio = isBio;
@@ -49,14 +49,6 @@ public abstract class Producer {
 
     public void addPickUpPoint(PickupPoint pickupPoint) {
         pickupPoints.add(pickupPoint);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPlace() {
