@@ -8,7 +8,7 @@
 
     <item
         android:id="@+id/navigation_stock_producer"
-        android:icon="@drawable/ic_account_circle_black_18dp"
+        android:icon="@drawable/outline_store_24"
         android:title="@string/title_stock" />
 
     <item

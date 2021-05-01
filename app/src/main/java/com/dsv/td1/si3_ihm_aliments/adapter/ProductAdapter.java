@@ -1,6 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
@@ -60,10 +64,11 @@ public class ProductAdapter extends BaseAdapter {
 
         TextView nom = maVue.findViewById(R.id.nameProduct);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
-        ImageView imageView = maVue.findViewById(R.id.imageProduct); //TODO: image
+        ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button button = maVue.findViewById(R.id.reservation);
-
-        //imageView.setImageResource(); //TODO: product picture
+        ContextWrapper cw = new ContextWrapper(contexte);
+        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
+        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
         //place.setText(listView.get(position).getPlace()); //TODO: place picture
 

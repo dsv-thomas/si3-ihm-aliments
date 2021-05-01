@@ -11,12 +11,11 @@ public class MaraicheFactory extends MarketFactory {
 
     @Override
     public Producer buildProducer(String name, String place, String pNumber, boolean isBio) {
-        Log.d(MarketFactory.LOG,"Factory_red_only");
         return new Maraiche(name, place, pNumber, isBio);
     }
 
     @Override
-    public Product buildProduct(String name, String quantity, String pricePerKg) {
-        return null;
+    public Product buildProduct(String name, String quantity, String pricePerKg, String imageName) {
+        return new Vegetaux(name, quantity, pricePerKg, imageName);
     }
 }

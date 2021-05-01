@@ -284,4 +284,14 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     public Bitmap getPictureToSave() {
         return picture;
     }
+
+    @Override
+    public void onAddProductClicked() {
+
+    }
+
+    @Override
+    public void onSubmitaddProductClicked(Producer producer, Bundle bundle) {
+
+    }
 }

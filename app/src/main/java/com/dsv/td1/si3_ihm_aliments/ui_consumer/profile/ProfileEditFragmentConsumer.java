@@ -74,7 +74,7 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IPermissionRequest.REQUEST_MEDIA_READ);
         } else {
-            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,consumer));
+            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,consumer.getUuid().toString()));
         }
 
         submitButton.setOnClickListener(new View.OnClickListener() {

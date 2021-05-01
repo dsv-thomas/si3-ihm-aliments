@@ -6,12 +6,12 @@ public class Poisson extends Product{
     private String fishingDate;
 
 
-    public Poisson(String name, String quantity, String pricePerKg) {
-        super(name, quantity, pricePerKg);
+    public Poisson(String name, String quantity, String pricePerKg, String imageName) {
+        super(name, quantity, pricePerKg, imageName);
     }
 
-    public Poisson(String name, String quantity, String pricePerKg, String fishingPlace, String fishingDate) {
-        super(name, quantity, pricePerKg);
+    public Poisson(String name, String quantity, String pricePerKg, String imageName, String fishingPlace, String fishingDate) {
+        super(name, quantity, pricePerKg, imageName);
         this.fishingPlace = fishingPlace;
         this.fishingDate = fishingDate;
     }

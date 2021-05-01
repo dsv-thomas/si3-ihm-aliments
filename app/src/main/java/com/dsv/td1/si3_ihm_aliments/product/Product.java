@@ -5,11 +5,13 @@ public abstract class Product {
     private String name;
     private String quantity;
     private String pricePerKg;
+    private String imageName;
 
-    public Product(String name, String quantity, String pricePerKg) {
+    public Product(String name, String quantity, String pricePerKg, String imageName) {
         this.name = name;
         this.quantity = quantity;
         this.pricePerKg = pricePerKg;
+        this.imageName = imageName;
     }
 
     public String getName() {
@@ -34,5 +36,13 @@ public abstract class Product {
 
     public void setPricePerKg(String pricePerKg) {
         this.pricePerKg = pricePerKg;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

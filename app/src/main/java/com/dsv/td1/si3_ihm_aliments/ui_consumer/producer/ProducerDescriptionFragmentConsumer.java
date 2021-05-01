@@ -35,10 +35,6 @@ public class ProducerDescriptionFragmentConsumer extends Fragment {
         TextView textView = root.findViewById(R.id.nameProducerPage);
         textView.setText(producer.getName());
 
-        //
-        producer.addProducts(new Poisson("Poisson", "4", "4"));
-        //
-
         ListView listView1 = root.findViewById(R.id.pickupPointList);
         PickupPointAdapter pickupPointAdapter = new PickupPointAdapter(getContext(), producer.getPickupPoints());
         pickupPointAdapter.addListener((IConsumerAdapterListener) getActivity());

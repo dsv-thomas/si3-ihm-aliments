@@ -10,12 +10,17 @@ public interface IProducerAdapterListener {
     void onClickProducer(int position);
 
     void onSettingsClicked();
+
     void onSubmitSettingsClicked(Producer producer, Bundle bundle);
 
-    void onPictureLoad(Bitmap bitmap );
+
+    void onPictureLoad(Bitmap bitmap);
+
     Bitmap getPictureToSave();
 
+    void onAddProductClicked();
 
+    void onSubmitaddProductClicked(Producer producer, Bundle bundle);
 
 
 //    void onButtonClicked(int action);

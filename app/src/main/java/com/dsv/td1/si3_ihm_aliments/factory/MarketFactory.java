@@ -15,5 +15,5 @@ abstract class MarketFactory {
     public static final int VEGETAUX = 103;
 
     public abstract Producer buildProducer(String name, String place, String pNumber, boolean isBio) throws Throwable;
-    public abstract Product buildProduct(String name, String quantity, String pricePerKg);
+    public abstract Product buildProduct(String name, String quantity, String pricePerKg, String imageName);
 }

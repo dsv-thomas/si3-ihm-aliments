@@ -12,9 +12,9 @@ import java.io.FileNotFoundException;
 
 public final class ImageLoadHelper {
 
-    public static Bitmap loadImageFromStorage(String directoryName, User user) {
+    public static Bitmap loadImageFromStorage(String directoryName, String filename) {
         try {
-            File f = new File(directoryName, user.getUuid() + ".jpg");
+            File f = new File(directoryName, filename + ".jpg");
             return BitmapFactory.decodeStream(new FileInputStream(f));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

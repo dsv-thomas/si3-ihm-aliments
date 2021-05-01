@@ -31,7 +31,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <EditText
-        android:id="@+id/editTextProducerName"
+        android:id="@+id/editTextProductNameAddProductProducer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextProducerName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextProductNameAddProductProducer" />
 
     <EditText
         android:id="@+id/editTextProducerTelNumber"

@@ -33,7 +33,7 @@ public class ProfileFragmentConsumer extends Fragment {
         ImageView imageView = root.findViewById(R.id.avatarConsumer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0)));
+        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
 
         Button button = root.findViewById(R.id.submitForm);
 

@@ -7,12 +7,12 @@ public class Vegetaux extends Product {
     private String category;
 
 
-    public Vegetaux(String name, String quantity, String pricePerKg) {
-        super(name, quantity, pricePerKg);
+    public Vegetaux(String name, String quantity, String pricePerKg, String imageName) {
+        super(name, quantity, pricePerKg, imageName);
     }
 
-    public Vegetaux(String name, String quantity, String pricePerKg, String origin, String variety, String category) {
-        super(name, quantity, pricePerKg);
+    public Vegetaux(String name, String quantity, String pricePerKg, String imageName, String origin, String variety, String category) {
+        super(name, quantity, pricePerKg, imageName);
         this.origin = origin;
         this.variety = variety;
         this.category = category;

@@ -33,8 +33,8 @@ public class Model_Producer extends Observable {
         producerList.clear();
         MaraicheFactory maraicheFactory = new MaraicheFactory();
 
-        addProduct(maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true));
-        addProduct(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
+        addProducer(maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true));
+        addProducer(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
         Log.d("MODEL", "producerList=" +producerList.size());
         Log.d("MODEL", "producerList=" + maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true).toString());
 
@@ -49,7 +49,7 @@ public class Model_Producer extends Observable {
         notifyObservers(producer);
     }
 
-    public void addProduct(Producer producer) {
+    public void addProducer(Producer producer) {
         producerList.add(producer);
         setChanged();
         notifyObservers(producer);

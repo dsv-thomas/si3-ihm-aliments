@@ -27,7 +27,7 @@ public class PoissionnierFactory extends MarketFactory{
     }
 
     @Override
-    public Product buildProduct(String name, String quantity, String pricePerKg) {
-        return new Poisson(name,quantity, pricePerKg);
+    public Product buildProduct(String name, String quantity, String pricePerKg, String imageName) {
+        return new Poisson(name,quantity, pricePerKg, imageName);
     }
 }
