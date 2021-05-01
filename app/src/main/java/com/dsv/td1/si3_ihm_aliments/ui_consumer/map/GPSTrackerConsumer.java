@@ -15,7 +15,7 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
-public class GPSTracker implements LocationListener {
+public class GPSTrackerConsumer implements LocationListener {
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
     private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
     private final Context mContext;
@@ -27,7 +27,7 @@ public class GPSTracker implements LocationListener {
     double latitude; // latitude
     double longitude; // longitude
 
-    public GPSTracker(Context context) {
+    public GPSTrackerConsumer(Context context) {
         this.mContext = context;
         getLocation();
     }
@@ -106,7 +106,7 @@ public class GPSTracker implements LocationListener {
      */
     public void stopUsingGPS() {
         if (locationManager != null) {
-            locationManager.removeUpdates(GPSTracker.this);
+            locationManager.removeUpdates(GPSTrackerConsumer.this);
         }
     }
 

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_producer"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerFragmentConsumer"
         android:label="@string/title_producer"
         tools:layout="@layout/fragment_user_producer_profile" />
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.map.MapFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.map.MapFragmentConsumer"
         android:label="@string/title_map"
         tools:layout="@layout/fragment_map_consumer" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragmentConsumer"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile_consumer2" />
 </navigation>

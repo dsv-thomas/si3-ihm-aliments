@@ -1,5 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui_producer.profile;
-
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.profile;
 
 import android.Manifest;
 import android.content.Context;
@@ -24,11 +23,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
-import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,32 +34,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ProfileEditFragment extends Fragment implements IPermissionRequest {
-    private IProducerAdapterListener listener;
-    private Producer producer;
+public class ProfileEditFragmentConsumer extends Fragment implements IPermissionRequest {
+    private IConsumerAdapterListener listener;
+    private Consumer consumer;
     private ImageView imageView;
     private String directoryName;
 
-    public ProfileEditFragment(Producer producer) {
-        this.producer = producer;
+    public ProfileEditFragmentConsumer(Consumer consumer) {
+        this.consumer = consumer;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listener = (IProducerAdapterListener) getActivity();
-        View root = inflater.inflate(R.layout.fragment_producer_profile_edit, container, false);
+        listener = (IConsumerAdapterListener) getActivity();
+        View root = inflater.inflate(R.layout.fragment_profile_consumer_edit, container, false);
 
         ContextWrapper cw = new ContextWrapper(getContext());
         directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();    // path to /data/user/0/etu.demo.camera/app_imageDir
         Log.d("PATHSAVE", directoryName);
 
-        EditText editTextName = root.findViewById(R.id.editTextProducerName);
-        editTextName.setText(producer.getName());
-
-        EditText editTextLocation = root.findViewById(R.id.editTextProducerLocation);
-        editTextLocation.setText(producer.getPlace());
-
-        EditText editTextTelNumber = root.findViewById(R.id.editTextProducerTelNumber);
-        editTextTelNumber.setText(producer.getpNumber());
+        EditText editText = root.findViewById(R.id.editTextPersonName);
+        editText.setText(consumer.getName());
 
         imageView = root.findViewById(R.id.avatarConsumer);
 
@@ -82,7 +74,7 @@ public class ProfileEditFragment extends Fragment implements IPermissionRequest 
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IPermissionRequest.REQUEST_MEDIA_READ);
         } else {
-            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,producer));
+            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,consumer));
         }
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -102,10 +94,8 @@ public class ProfileEditFragment extends Fragment implements IPermissionRequest 
                 }
 
                 Bundle bundle = new Bundle();
-                bundle.putString("name", editTextName.getText().toString());
-                bundle.putString("location", editTextLocation.getText().toString());
-                bundle.putString("number", editTextTelNumber.getText().toString());
-                listener.onSubmitSettingsClicked(producer, bundle);
+                bundle.putString("name", editText.getText().toString());
+                listener.onSubmitSettingsClicked(consumer, bundle);
             }
         });
         return root;
@@ -123,7 +113,7 @@ public class ProfileEditFragment extends Fragment implements IPermissionRequest 
     public void saveToInternalStorage(Bitmap picture) {
         OutputStream outputStream = null;
         try {
-            File file = new File(directoryName, producer.getUuid() + ".jpg");
+            File file = new File(directoryName, consumer.getUuid() + ".jpg");
             outputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

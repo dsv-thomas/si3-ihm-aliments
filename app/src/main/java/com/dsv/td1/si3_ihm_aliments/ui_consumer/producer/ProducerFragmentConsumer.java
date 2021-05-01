@@ -15,7 +15,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class ProducerFragment extends Fragment {
+public class ProducerFragmentConsumer extends Fragment {
     IProducerAdapterListener iProducerAdapterListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater,

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_reservation_producer"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.reservation.ReservationFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.reservation.ReservationFragmentProducer"
         android:label="@string/title_reservation_producer"
         tools:layout="@layout/fragment_reservation_producer" />
 
     <fragment
         android:id="@+id/navigation_stock_producer"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragmentProducer"
         android:label="@string/title_stock"
         tools:layout="@layout/fragment_stock_producer" />
 
     <fragment
         android:id="@+id/navigation_profile_producer"
-        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragment"
+        android:name="com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile_producer_for_consumer" />
 </navigation>

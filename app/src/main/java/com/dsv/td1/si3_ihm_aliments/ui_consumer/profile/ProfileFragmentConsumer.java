@@ -1,4 +1,4 @@
-package com.dsv.td1.si3_ihm_aliments.ui_producer.profile;
+package com.dsv.td1.si3_ihm_aliments.ui_consumer.profile;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -16,27 +16,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
-import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class ProfileFragment extends Fragment {
-    IProducerAdapterListener listener;
+public class ProfileFragmentConsumer extends Fragment {
+    IConsumerAdapterListener listener;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        View root = inflater.inflate(R.layout.fragment_profile_producer_for_consumer, container, false);
-
-        listener = (IProducerAdapterListener) getActivity();
-        TextView textView = root.findViewById(R.id.nameProducerPage);
-        ImageView imageView = root.findViewById(R.id.avatarProducer);
+        View root = inflater.inflate(R.layout.fragment_profile_consumer, container, false);
+        listener = (IConsumerAdapterListener) getActivity();
+        TextView textView = root.findViewById(R.id.nameConsumerPage);
+        ImageView imageView = root.findViewById(R.id.avatarConsumer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0)));
+        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0)));
 
         Button button = root.findViewById(R.id.submitForm);
 
@@ -67,3 +64,4 @@ public class ProfileFragment extends Fragment {
     }
 
 }
+

@@ -22,7 +22,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -39,9 +38,10 @@ import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragment;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragment;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragment;
+import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
+import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
+import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragmentConsumer;
+import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -51,7 +51,7 @@ import java.util.Arrays;
 public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerAdapterListener, IProducerAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
 
     private Bitmap picture;
-    private ProfileEditFragment profileEditFragment;
+    private ProfileEditFragmentConsumer profileEditFragmentConsumer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +103,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         Log.d("CONTROLLER", "position=" + position);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragment(Model_Producer.getInstance().getProducerList().get(position)));
+        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -175,8 +175,8 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public void onSettingsClicked() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        profileEditFragment = new ProfileEditFragment(Model_Consumer.getInstance().getConsumerList().get(0));
-        ft.add(R.id.nav_host_consumer_fragment, profileEditFragment);
+        profileEditFragmentConsumer = new ProfileEditFragmentConsumer(Model_Consumer.getInstance().getConsumerList().get(0));
+        ft.add(R.id.nav_host_consumer_fragment, profileEditFragmentConsumer);
         ft.addToBackStack("setting");
         ft.commit();
     }
@@ -186,7 +186,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
          consumer.setName(bundle.get("name").toString());
         //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragmentConsumer()).addToBackStack(null).commit();
     }
 
 
@@ -195,7 +195,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         Log.d("CONTROLLER", "position=" + position);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragment(Model_Producer.getInstance().getProducerList().get(position)));
+        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
         ft.addToBackStack(null);
         ft.commit();
     }
@@ -205,7 +205,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         //Model_Producer.getInstance().modifyName(producer, bundle.get("name").toString());
         producer.setName(bundle.get("name").toString());
         //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragment()).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
     }
 
     @Override
@@ -238,7 +238,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                 break;
             case REQUEST_MEDIA_WRITE:
                 if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    profileEditFragment.saveToInternalStorage(picture);
+                    profileEditFragmentConsumer.saveToInternalStorage(picture);
                     Toast.makeText(getApplicationContext(), "Write permission GRANTED", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Write permission NOT GRANTED", Toast.LENGTH_LONG).show();
@@ -264,7 +264,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
             if (resultCode == RESULT_OK) {
                 picture = (Bitmap) data.getExtras().get("data");
 
-                profileEditFragment.setImage(picture);
+                profileEditFragmentConsumer.setImage(picture);
             } else if (resultCode == RESULT_CANCELED) {
                 Toast toast = Toast.makeText(getApplicationContext(), "picture canceled", Toast.LENGTH_LONG);
                 toast.show();
@@ -277,7 +277,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void onPictureLoad(Bitmap bitmap) {
-        profileEditFragment.setImage(bitmap);
+        profileEditFragmentConsumer.setImage(bitmap);
     }
 
     @Override

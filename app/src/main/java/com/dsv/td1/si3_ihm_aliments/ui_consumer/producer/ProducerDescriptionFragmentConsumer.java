@@ -19,12 +19,12 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Poisson;
 
 
-public class ProducerDescriptionFragment extends Fragment {
+public class ProducerDescriptionFragmentConsumer extends Fragment {
 
     private Producer producer;
     private IProducerAdapterListener listener;
 
-    public ProducerDescriptionFragment(Producer producer) {
+    public ProducerDescriptionFragmentConsumer(Producer producer) {
         this.producer = producer;
     }
 

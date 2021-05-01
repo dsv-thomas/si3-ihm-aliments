@@ -16,12 +16,12 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 
 
-public class StockDescriptionFragment extends androidx.fragment.app.Fragment{
+public class StockDescriptionFragmentProducer extends androidx.fragment.app.Fragment{
 
     private Producer producer;
     private IProducerAdapterListener listener;
 
-    public StockDescriptionFragment(Producer producer) {
+    public StockDescriptionFragmentProducer(Producer producer) {
         this.producer = producer;
     }
 

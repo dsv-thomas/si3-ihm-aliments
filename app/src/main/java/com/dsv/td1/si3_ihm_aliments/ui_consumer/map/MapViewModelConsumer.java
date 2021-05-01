@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MapViewModel extends ViewModel {
+public class MapViewModelConsumer extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public MapViewModel() {
+    public MapViewModelConsumer() {
         mText = new MutableLiveData<>();
         mText.setValue("This is map fragment");
     }

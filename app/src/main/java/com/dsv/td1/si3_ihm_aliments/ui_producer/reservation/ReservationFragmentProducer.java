@@ -13,7 +13,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class ReservationFragment extends androidx.fragment.app.Fragment {
+public class ReservationFragmentProducer extends androidx.fragment.app.Fragment {
 
         IProducerAdapterListener iProducerAdapterListener;
 

@@ -3,16 +3,13 @@ package com.dsv.td1.si3_ihm_aliments.ui_consumer.map;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,20 +36,20 @@ import java.util.ArrayList;
 import static android.content.Context.LOCATION_SERVICE;
 
 
-public class MapFragment extends Fragment implements IPermissionRequest {
+public class MapFragmentConsumer extends Fragment implements IPermissionRequest {
 
     IMapController mapController;
     private MapView map;
-    private MapViewModel mapViewModel;
+    private MapViewModelConsumer mapViewModelConsumer;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
+        mapViewModelConsumer = new ViewModelProvider(this).get(MapViewModelConsumer.class);
 
 
         View root = inflater.inflate(R.layout.fragment_map_consumer, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        mapViewModelConsumer.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
@@ -61,7 +58,7 @@ public class MapFragment extends Fragment implements IPermissionRequest {
 
         IMapController mapController;
 
-        GPSTracker mGPS = new GPSTracker(getContext());
+        GPSTrackerConsumer mGPS = new GPSTrackerConsumer(getContext());
 
         assert getActivity() != null;
         map = root.findViewById(R.id.map);
