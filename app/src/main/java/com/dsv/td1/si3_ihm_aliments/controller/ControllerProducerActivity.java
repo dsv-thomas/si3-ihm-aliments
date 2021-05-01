@@ -27,18 +27,17 @@ import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
-import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer;
+import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileEditFragmentProducer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockAddProductFragmentProducer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ControllerProducerActivity extends AppCompatActivity implements IConsumerAdapterListener, IProducerAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest{
+public class ControllerProducerActivity extends AppCompatActivity implements IConsumerAdapterListener, IProducerAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
 
     private Bitmap picture;
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
-
+    private ProfileEditFragmentProducer profileEditFragmentProducer;
 
 
     @Override
@@ -86,7 +85,11 @@ public class ControllerProducerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void onSettingsClicked() {
-
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        profileEditFragmentProducer = new ProfileEditFragmentProducer(Model_Producer.getInstance().getProducerList().get(0));
+        ft.add(R.id.nav_host_producer_fragment, profileEditFragmentProducer);
+        ft.addToBackStack("setting");
+        ft.commit();
     }
 
     @Override
@@ -112,7 +115,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements ICo
     @Override
     public void onSubmitaddProductClicked(Producer producer, Bundle bundle) {
         MaraicheFactory maraicheFactory = new MaraicheFactory();
-        producer.addProducts(maraicheFactory.buildProduct(bundle.get("editTextProductName").toString(), bundle.get("editTextProductQuantity").toString(), bundle.get("editTextProductPrice").toString(),bundle.get("productImageName").toString()));
+        producer.addProducts(maraicheFactory.buildProduct(bundle.get("editTextProductName").toString(), bundle.get("editTextProductQuantity").toString(), bundle.get("editTextProductPrice").toString(), bundle.get("productImageName").toString()));
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new StockFragmentProducer()).addToBackStack(null).commit();
 
@@ -196,5 +199,15 @@ public class ControllerProducerActivity extends AppCompatActivity implements ICo
         return picture;
     }
 
-
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+        Log.d("BACK", String.valueOf(count));
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
 }

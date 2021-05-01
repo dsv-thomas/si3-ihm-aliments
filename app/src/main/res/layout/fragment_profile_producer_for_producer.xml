@@ -30,7 +30,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/nameConsumerPage"
+        android:id="@+id/nameProducerProfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -48,7 +48,7 @@
         android:text="Localisation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameConsumerPage" />
+        app:layout_constraintTop_toBottomOf="@+id/nameProducerProfil" />
 
     <TextView
         android:id="@+id/telNumberConsumerPage"

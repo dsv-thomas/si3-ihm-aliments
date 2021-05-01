@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,6 +47,7 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         listener = (IProducerAdapterListener) getActivity();
         View root = inflater.inflate(R.layout.fragment_producer_profile_edit, container, false);
 
@@ -81,7 +83,7 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IPermissionRequest.REQUEST_MEDIA_READ);
         } else {
-            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,producer.getUuid().toString()));
+          //  listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,producer.getUuid().toString()));
         }
 
         submitButton.setOnClickListener(new View.OnClickListener() {

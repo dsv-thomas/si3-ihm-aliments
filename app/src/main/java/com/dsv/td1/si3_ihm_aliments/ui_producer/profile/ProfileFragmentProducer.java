@@ -30,13 +30,13 @@ public class ProfileFragmentProducer extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_producer, container, false);
-/*
+
         listener = (IProducerAdapterListener) getActivity();
-        TextView textView = root.findViewById(R.id.nameProducerPage);
-        ImageView imageView = root.findViewById(R.id.avatarProducer);
+        TextView textView = root.findViewById(R.id.nameProducerProfil);
+       // ImageView imageView = root.findViewById(R.id.avatarProducer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0)));
+        //imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
 
         Button button = root.findViewById(R.id.submitForm);
 
@@ -47,17 +47,17 @@ public class ProfileFragmentProducer extends Fragment {
             }
         });
 
-        textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
+        textView.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
 
-        ListView listView = root.findViewById(R.id.consumer_reservation);
-        ReservationAdapter reservationAdapter = new ReservationAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
+ //       ListView listView = root.findViewById(R.id.consumer_reservation);
+  //      ReservationAdapter reservationAdapter = new ReservationAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
 
 
-        listView.setAdapter(reservationAdapter);
+//        listView.setAdapter(reservationAdapter);
 
         //productAdapter.addListener((IConsumerAdapterListener) getContext());
 
- */
+
         return root;
     }
 
