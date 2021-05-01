@@ -19,7 +19,7 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
 
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
-            View root = inflater.inflate(R.layout.fragment_stock_producer, container, false);
+            View root = inflater.inflate(R.layout.fragment_reservation_producer, container, false);
 
             ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
          //   ListView listView = root.findViewById(R.id.listViewProduct);

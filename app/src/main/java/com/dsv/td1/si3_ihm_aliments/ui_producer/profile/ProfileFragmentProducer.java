@@ -29,8 +29,8 @@ public class ProfileFragmentProducer extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_profile_producer_for_consumer, container, false);
-
+        View root = inflater.inflate(R.layout.fragment_profile_producer_for_producer, container, false);
+/*
         listener = (IProducerAdapterListener) getActivity();
         TextView textView = root.findViewById(R.id.nameProducerPage);
         ImageView imageView = root.findViewById(R.id.avatarProducer);
@@ -56,6 +56,8 @@ public class ProfileFragmentProducer extends Fragment {
         listView.setAdapter(reservationAdapter);
 
         //productAdapter.addListener((IConsumerAdapterListener) getContext());
+
+ */
         return root;
     }
 
