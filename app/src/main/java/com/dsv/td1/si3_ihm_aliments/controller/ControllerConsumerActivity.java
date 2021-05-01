@@ -201,6 +201,14 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     }
 
     @Override
+    public void onSubmitSettingsClicked(Producer producer, Bundle bundle) {
+        //Model_Producer.getInstance().modifyName(producer, bundle.get("name").toString());
+        producer.setName(bundle.get("name").toString());
+        //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragment()).addToBackStack(null).commit();
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         parent.getItemAtPosition(position);
     }
