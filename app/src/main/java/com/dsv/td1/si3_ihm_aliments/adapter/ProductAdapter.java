@@ -14,7 +14,6 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ProductAdapter extends BaseAdapter {
@@ -60,7 +59,7 @@ public class ProductAdapter extends BaseAdapter {
         }
 
         TextView nom = maVue.findViewById(R.id.nameProduct);
-        TextView place = maVue.findViewById(R.id.pickupPointReservation);
+        TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
         ImageView imageView = maVue.findViewById(R.id.imageProduct); //TODO: image
         Button button = maVue.findViewById(R.id.reservation);
 

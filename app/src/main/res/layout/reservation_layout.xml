@@ -107,7 +107,7 @@
         app:srcCompat="@drawable/outline_pin_drop_24" />
 
     <TextView
-        android:id="@+id/pickupPointReservation"
+        android:id="@+id/pickupPointReservationLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -117,12 +117,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/datePickupPointReservation"
+        android:id="@+id/schedulePickupPointReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="27/04/21"
-        app:layout_constraintStart_toStartOf="@+id/pickupPointReservation"
-        app:layout_constraintTop_toBottomOf="@+id/pickupPointReservation" />
+        app:layout_constraintStart_toStartOf="@+id/pickupPointReservationLayout"
+        app:layout_constraintTop_toBottomOf="@+id/pickupPointReservationLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
