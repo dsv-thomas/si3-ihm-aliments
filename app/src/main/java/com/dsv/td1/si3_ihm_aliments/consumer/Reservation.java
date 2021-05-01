@@ -1,5 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.consumer;
 
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.util.Date;
@@ -8,14 +9,16 @@ import java.util.UUID;
 public class Reservation {
     private UUID id;
     private Consumer consumer;
+    private Producer producer;
     private Product product;
     private int quantity;
     private Date date;
     private PickupPoint pickupPoint;
 
-    public Reservation(Consumer consumer, Product product, int quantity, PickupPoint pickupPoint) {
+    public Reservation(Consumer consumer, Producer producer, Product product, int quantity, PickupPoint pickupPoint) {
         this.id = UUID.randomUUID();
         this.consumer = consumer;
+        this.producer = producer;
         this.product = product;
         this.quantity = quantity;
         this.date = new Date();
@@ -45,5 +48,9 @@ public class Reservation {
 
     public PickupPoint getPickupPoint() {
         return pickupPoint;
+    }
+
+    public Producer getProducer() {
+        return producer;
     }
 }

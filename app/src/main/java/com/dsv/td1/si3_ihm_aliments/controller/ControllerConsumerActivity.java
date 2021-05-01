@@ -157,7 +157,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                 Log.d("RESERVATION", product.getName() + " " + Model_Consumer.getInstance().getConsumerList().get(0).getName());
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
-                Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
+                Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
                 popupWindow.dismiss();
             }
         });

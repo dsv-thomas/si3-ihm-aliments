@@ -12,6 +12,7 @@ import com.dsv.td1.si3_ihm_aliments.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
 public class Model_Consumer extends Observable {
 
@@ -52,5 +53,13 @@ public class Model_Consumer extends Observable {
 
     public void setConsumerList(List<Consumer> consumerList) {
         Model_Consumer.consumerList = consumerList;
+    }
+
+    public List<Reservation> reservationsForProducer(Producer producer) {
+        List<Reservation> reservations = new ArrayList<>();
+        for(Consumer consumer: consumerList) {
+            reservations.addAll(consumer.getReservations().stream().filter(reservation -> reservation.getProducer().equals(producer)).collect(Collectors.toList()));
+        }
+        return reservations;
     }
 }

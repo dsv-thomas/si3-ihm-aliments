@@ -9,8 +9,11 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
+import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
 public class ReservationFragmentProducer extends androidx.fragment.app.Fragment {
@@ -21,11 +24,11 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
                                  ViewGroup container, Bundle savedInstanceState) {
             View root = inflater.inflate(R.layout.fragment_reservation_producer, container, false);
 
-            ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
-         //   ListView listView = root.findViewById(R.id.listViewProduct);
-          //  listView.setAdapter(producerAdapter);
+            ReservationAdapter reservationAdapter = new ReservationAdapter(this.getContext(), Model_Consumer.getInstance().reservationsForProducer(Model_Producer.getInstance().getProducerList().get(0)));
+            ListView listView = root.findViewById(R.id.listViewReservationProducer);
+            listView.setAdapter(reservationAdapter);
 
-      //      producerAdapter.addListener((IProducerAdapterListener) getContext());
+            reservationAdapter.addListener((IConsumerAdapterListener) getContext());
             return root;
         }
 
