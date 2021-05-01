@@ -14,11 +14,13 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.util.List;
 
+import static com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener.ACTION_CLICK_PRODUCER;
+
 public class ProducerAdapter extends BaseAdapter {
     private static LayoutInflater mInflater = null; // Un mécanisme pour gérer l'affichage graphique depuis un layout XML
     private Context contexte;
     private List<Producer> listView;
-    private IProducerAdapterListener listener;
+    private IAdapterListener listener;
 
     public ProducerAdapter(Context contexte, List listView) {
         this.listView = listView;
@@ -63,14 +65,14 @@ public class ProducerAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Log.d("ADAPTER","position="+position+"listener"+ listener);
 
-                if (listener!=null) listener.onClickProducer(position);
+                if (listener!=null) listener.onClickItemListView(position, ACTION_CLICK_PRODUCER);
 
             }
         });
         return maVue;
     }
 
-    public void addListener(IProducerAdapterListener aListener) {
+    public void addListener(IAdapterListener aListener) {
         listener = aListener;
     }
 }

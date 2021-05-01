@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.dsv.td1.si3_ihm_aliments.R;
 
+import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
@@ -31,7 +32,7 @@ public class StockFragmentProducer extends Fragment {
 
         ListView listView1 = root.findViewById(R.id.listStockForProducer);
         ProductAdapter productAdapter = new ProductAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getProposedProducts(), Model_Producer.getInstance().getProducerList().get(0));
-        productAdapter.addListener((IConsumerAdapterListener) getActivity());
+        productAdapter.addListener((IAdapterListener) getActivity());
         listView1.setAdapter(productAdapter);
 
 

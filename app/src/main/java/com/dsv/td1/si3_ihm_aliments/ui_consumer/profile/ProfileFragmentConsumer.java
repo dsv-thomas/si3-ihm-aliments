@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
-import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 
 public class ProfileFragmentConsumer extends Fragment {
@@ -33,7 +33,7 @@ public class ProfileFragmentConsumer extends Fragment {
         ImageView imageView = root.findViewById(R.id.avatarConsumer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
 
         Button button = root.findViewById(R.id.submitForm);
 

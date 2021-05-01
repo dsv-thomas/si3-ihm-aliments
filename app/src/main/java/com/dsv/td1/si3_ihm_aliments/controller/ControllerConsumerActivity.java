@@ -22,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,8 +30,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
@@ -41,14 +42,13 @@ import com.dsv.td1.si3_ihm_aliments.product.Product;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragmentConsumer;
-import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
-public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerAdapterListener, IProducerAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
+public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerAdapterListener, IAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
 
     private Bitmap picture;
     private ProfileEditFragmentConsumer profileEditFragmentConsumer;
@@ -74,17 +74,22 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void onClickItemListView(int position, int action) {
+        FragmentTransaction ft;
+        switch (action) {
+            case ACTION_CLICK_PRODUCT:
 
-    /**
-     * ACTIONS
-     *
-     * @Override public void onButtonClicked(int action) {
-     * Log.d("CONTROLLER","callback() -->  action="+action);
-     * switch (action) {
-     * case BACK :  Log.d("CONTROLLER","TEST"); break;
-     * }
-     * }
-     */
+                break;
+            case ACTION_CLICK_PRODUCER:
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+        }
+    }
+
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
@@ -96,18 +101,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
             getSupportFragmentManager().popBackStack();
         }
     }
-
-
-    @Override
-    public void onClickProduct(int position) {
-        Log.d("CONTROLLER", "position=" + position);
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
-        ft.addToBackStack(null);
-        ft.commit();
-    }
-
 
     @Override
     public void onButtonShowPopupWindowClick(View view, Product product, Producer producer) {
@@ -169,7 +162,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                 return true;
             }
         });
-
     }
 
     @Override
@@ -184,29 +176,11 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public void onSubmitSettingsClicked(Consumer consumer, Bundle bundle) {
         //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
-         consumer.setName(bundle.get("name").toString());
-        //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragmentConsumer()).addToBackStack(null).commit();
+        consumer.setName(bundle.get("name").toString());
+        getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragmentConsumer()).addToBackStack(null).commit();
     }
 
-
-    @Override
-    public void onClickProducer(int position) {
-        Log.d("CONTROLLER", "position=" + position);
-
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
-        ft.addToBackStack(null);
-        ft.commit();
-    }
-
-    @Override
-    public void onSubmitSettingsClicked(Producer producer, Bundle bundle) {
-        //Model_Producer.getInstance().modifyName(producer, bundle.get("name").toString());
-        producer.setName(bundle.get("name").toString());
-        //getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -263,7 +237,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         if (requestCode == REQUEST_CAMERA) {
             if (resultCode == RESULT_OK) {
                 picture = (Bitmap) data.getExtras().get("data");
-
                 profileEditFragmentConsumer.setImage(picture);
             } else if (resultCode == RESULT_CANCELED) {
                 Toast toast = Toast.makeText(getApplicationContext(), "picture canceled", Toast.LENGTH_LONG);
@@ -283,15 +256,5 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public Bitmap getPictureToSave() {
         return picture;
-    }
-
-    @Override
-    public void onAddProductClicked() {
-
-    }
-
-    @Override
-    public void onSubmitaddProductClicked(Producer producer, Bundle bundle) {
-
     }
 }

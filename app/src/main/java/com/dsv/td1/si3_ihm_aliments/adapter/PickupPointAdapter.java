@@ -20,7 +20,7 @@ public class PickupPointAdapter extends BaseAdapter {
     private static LayoutInflater mInflater = null; // Un mécanisme pour gérer l'affichage graphique depuis un layout XML
     private Context contexte;
     private List<PickupPoint> listView;
-    private IConsumerAdapterListener listener;
+    private IAdapterListener listener;
 
     public PickupPointAdapter(Context contexte, List listView) {
         this.listView = listView;
@@ -70,20 +70,10 @@ public class PickupPointAdapter extends BaseAdapter {
         });
 
 */
-
-        maVue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ADAPTER","position="+position+"listener"+ listener);
-
-                if (listener!=null) listener.onClickProduct(position);
-
-            }
-        });
         return maVue;
     }
 
-    public void addListener(IConsumerAdapterListener aListener) {
+    public void addListener(IAdapterListener aListener) {
         listener = aListener;
     }
 }

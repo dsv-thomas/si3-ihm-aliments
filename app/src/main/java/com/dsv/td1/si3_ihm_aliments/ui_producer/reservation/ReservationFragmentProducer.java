@@ -9,6 +9,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
@@ -18,7 +19,7 @@ import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
 public class ReservationFragmentProducer extends androidx.fragment.app.Fragment {
 
-        IProducerAdapterListener iProducerAdapterListener;
+    IProducerAdapterListener iProducerAdapterListener;
 
         public View onCreateView(@NonNull LayoutInflater inflater,
                                  ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
             ListView listView = root.findViewById(R.id.listViewReservationProducer);
             listView.setAdapter(reservationAdapter);
 
-            reservationAdapter.addListener((IConsumerAdapterListener) getContext());
+            reservationAdapter.addListener((IAdapterListener) getContext());
             return root;
         }
 

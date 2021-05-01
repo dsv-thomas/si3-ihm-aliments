@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
@@ -26,7 +27,7 @@ public class ProducerFragmentConsumer extends Fragment {
         ListView listView = root.findViewById(R.id.listViewProducer);
         listView.setAdapter(producerAdapter);
 
-        producerAdapter.addListener((IProducerAdapterListener) getContext());
+        producerAdapter.addListener((IAdapterListener) getContext());
         return root;
     }
 

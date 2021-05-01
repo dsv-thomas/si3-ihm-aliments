@@ -6,15 +6,12 @@ import android.os.Bundle;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 public interface IProducerAdapterListener {
-
-    void onClickProducer(int position);
-
     void onSettingsClicked();
-
     void onSubmitSettingsClicked(Producer producer, Bundle bundle);
 
 
-    void onPictureLoad(Bitmap bitmap);
+    void onProfilPictureLoad(Bitmap bitmap);
+    void onProductPictureLoad(Bitmap bitmap);
 
     Bitmap getPictureToSave();
 

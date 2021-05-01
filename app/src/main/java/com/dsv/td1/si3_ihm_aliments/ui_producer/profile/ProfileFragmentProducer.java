@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.ReservationAdapter;
-import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
@@ -33,10 +31,10 @@ public class ProfileFragmentProducer extends Fragment {
 
         listener = (IProducerAdapterListener) getActivity();
         TextView textView = root.findViewById(R.id.nameProducerProfil);
-       // ImageView imageView = root.findViewById(R.id.avatarProducer);
+        ImageView imageView = root.findViewById(R.id.avatarProducer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        //imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
 
         Button button = root.findViewById(R.id.submitForm);
 

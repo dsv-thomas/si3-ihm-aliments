@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
-import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,7 +49,6 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
 
         ContextWrapper cw = new ContextWrapper(getContext());
         directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();    // path to /data/user/0/etu.demo.camera/app_imageDir
-        Log.d("PATHSAVE", directoryName);
 
         EditText editText = root.findViewById(R.id.editTextPersonName);
         editText.setText(consumer.getName());
@@ -74,13 +72,12 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IPermissionRequest.REQUEST_MEDIA_READ);
         } else {
-            listener.onPictureLoad(ImageLoadHelper.loadImageFromStorage(directoryName,consumer.getUuid().toString()));
+            listener.onPictureLoad(ImagesHelper.loadImageFromStorage(directoryName, consumer.getUuid().toString()));
         }
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bitmap picture = listener.getPictureToSave();
                 if (picture != null) {
                     //manage authorizations
@@ -92,7 +89,6 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
                         saveToInternalStorage(picture);
                     }
                 }
-
                 Bundle bundle = new Bundle();
                 bundle.putString("name", editText.getText().toString());
                 listener.onSubmitSettingsClicked(consumer, bundle);
@@ -110,10 +106,10 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
         imageView.setImageBitmap(bitmap);
     }
 
-    public void saveToInternalStorage(Bitmap picture) {
+    public void saveToInternalStorage( Bitmap picture) {
         OutputStream outputStream = null;
         try {
-            File file = new File(directoryName, consumer.getUuid() + ".jpg");
+            File file = new File(directoryName, consumer.getUuid().toString() + ".jpg");
             outputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -130,4 +126,6 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
             e.printStackTrace();
         }
     }
+
+
 }

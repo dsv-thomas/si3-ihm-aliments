@@ -11,18 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
-import com.dsv.td1.si3_ihm_aliments.product.Poisson;
-
 
 public class ProducerDescriptionFragmentConsumer extends Fragment {
 
     private Producer producer;
-    private IProducerAdapterListener listener;
+    private IAdapterListener listener;
 
     public ProducerDescriptionFragmentConsumer(Producer producer) {
         this.producer = producer;
@@ -30,28 +27,20 @@ public class ProducerDescriptionFragmentConsumer extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        listener = (IProducerAdapterListener) getActivity();
+        listener = (IAdapterListener) getActivity();
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_consumer, container, false);
         TextView textView = root.findViewById(R.id.nameProducerPage);
         textView.setText(producer.getName());
 
         ListView listView1 = root.findViewById(R.id.pickupPointList);
         PickupPointAdapter pickupPointAdapter = new PickupPointAdapter(getContext(), producer.getPickupPoints());
-        pickupPointAdapter.addListener((IConsumerAdapterListener) getActivity());
+        pickupPointAdapter.addListener((IAdapterListener) getActivity());
         listView1.setAdapter(pickupPointAdapter);
 
         ListView listView = root.findViewById(R.id.productsList);
         ProductAdapter productAdapter = new ProductAdapter(getContext(), producer.getProposedProducts(), producer);
-        productAdapter.addListener((IConsumerAdapterListener) getActivity());
+        productAdapter.addListener((IAdapterListener) getActivity());
         listView.setAdapter(productAdapter);
-
-/*
-        root.findViewById(R.id.backProducerPage).setOnClickListener(v -> {
-            Log.d("BACK","BACK");
-            listener.onButtonClicked(BACK);
-        });
-*/
-
 
         return root;
     }

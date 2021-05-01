@@ -12,20 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.helpers.ImageLoadHelper;
-import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
-import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.util.List;
+
+import static com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener.ACTION_CLICK_PRODUCT;
 
 public class ProductAdapter extends BaseAdapter {
 
     private static LayoutInflater mInflater = null; // Un mécanisme pour gérer l'affichage graphique depuis un layout XML
     private Context contexte;
     private List<Product> listView;
-    private IConsumerAdapterListener listener;
+    private IAdapterListener iAdapterListener;
+    private IConsumerAdapterListener iConsumerAdapterListener;
     private Producer currentProducer;
 
     public ProductAdapter(Context contexte, List listView) {
@@ -65,41 +66,36 @@ public class ProductAdapter extends BaseAdapter {
         TextView nom = maVue.findViewById(R.id.nameProduct);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
-        Button button = maVue.findViewById(R.id.reservation);
+        Button reservationButton = maVue.findViewById(R.id.reservation);
         ContextWrapper cw = new ContextWrapper(contexte);
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImageLoadHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
         //place.setText(listView.get(position).getPlace()); //TODO: place picture
 
         //Remove reservation button
         if(parent.toString().contains("consumer_reservation")) {
-            button.setVisibility(View.GONE);
+            reservationButton.setVisibility(View.GONE);
         }
-
-        button.setOnClickListener(new View.OnClickListener() {
+        reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Réservation","position="+position+"listener"+ listener);
-                if(listener!=null) listener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
+                Log.d("Réservation","position="+position+"listener"+ iAdapterListener);
+                if(iAdapterListener !=null) iAdapterListener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
             }
         });
-
-
 
         maVue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ADAPTER","position="+position+"listener"+ listener);
-
-                if (listener!=null) listener.onClickProduct(position);
-
+                Log.d("ADAPTER","position="+position+"listener"+ iAdapterListener);
+                if (iAdapterListener !=null) iAdapterListener.onClickItemListView(position, ACTION_CLICK_PRODUCT);
             }
         });
         return maVue;
     }
 
-    public void addListener(IConsumerAdapterListener aListener) {
-        listener = aListener;
+    public void addListener(IAdapterListener aListener) {
+        iAdapterListener = aListener;
     }
 }
