@@ -18,33 +18,55 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/avatarConsumer"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="104dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-
 
     <TextView
         android:id="@+id/nameConsumerPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="76dp"
-        android:text="Name"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="56dp"
+        android:text="Nom de l'entreprise"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/avatarConsumer" />
+
+
+    <TextView
+        android:id="@+id/locationProducerPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Localisation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameConsumerPage" />
+
+    <TextView
+        android:id="@+id/telNumberConsumerPage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="40dp"
+        android:text="Numéro de téléphone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locationProducerPage" />
 
     <ListView
-        android:id="@+id/consumer_reservation"
+        android:id="@+id/producer_notifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.552" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
