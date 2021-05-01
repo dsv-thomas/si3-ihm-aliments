@@ -9,7 +9,7 @@
         android:id="@+id/navigation_producer"
         android:name="com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerFragment"
         android:label="@string/title_producer"
-        tools:layout="@layout/fragment_producer_consumer" />
+        tools:layout="@layout/fragment_user_producer_profile" />
 
     <fragment
         android:id="@+id/navigation_map"

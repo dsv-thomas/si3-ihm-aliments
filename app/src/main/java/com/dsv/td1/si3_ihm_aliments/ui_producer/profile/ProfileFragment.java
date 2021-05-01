@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_profile_producer, container, false);
+        View root = inflater.inflate(R.layout.fragment_user_producer_profile, container, false);
         listener = (IProducerAdapterListener) getActivity();
         TextView textView = root.findViewById(R.id.nameProducerPage);
         ImageView imageView = root.findViewById(R.id.avatarProducer);

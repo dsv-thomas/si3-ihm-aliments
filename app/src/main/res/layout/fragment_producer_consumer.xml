@@ -13,4 +13,5 @@
         android:background="#FFFFFF"
         tools:layout_editor_absoluteX="86dp"
         tools:layout_editor_absoluteY="170dp" />
+    
 </androidx.appcompat.widget.LinearLayoutCompat>
