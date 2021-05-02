@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.dsv.td1.si3_ihm_aliments.controller.ControllerConsumerActivity;
 import com.dsv.td1.si3_ihm_aliments.controller.ControllerProducerActivity;
@@ -18,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
     public static NotificationManager notificationManager;
 
     private void createNotificationChannel(){
+        Log.d("dfsfsdfdsfsd", "tes");
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            Log.d("LDLDLDLLDLD", "test");
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel Panier Gourmand",
                     NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("Channel pour l'application des producteurs de sa région");
@@ -31,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
+        createNotificationChannel();
+        Log.d("dfsfsdfdsfsd", "");
         findViewById(R.id.start_client).setOnClickListener(click-> {
             Intent intent = new Intent(getApplicationContext(), ControllerConsumerActivity.class);
             startActivity(intent);
@@ -40,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), ControllerProducerActivity.class);
             startActivity(intent);
         });
-        createNotificationChannel();
     }
 
 }

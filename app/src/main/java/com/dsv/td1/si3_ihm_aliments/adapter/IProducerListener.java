@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
-public interface IProducerAdapterListener {
+public interface IProducerListener {
     void onSettingsClicked();
     void onSubmitSettingsClicked(Producer producer, Bundle bundle);
 

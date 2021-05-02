@@ -53,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/idReservation" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/deleteReservation"
         android:layout_width="60dp"
         android:layout_height="41dp"
         android:layout_marginStart="344dp"

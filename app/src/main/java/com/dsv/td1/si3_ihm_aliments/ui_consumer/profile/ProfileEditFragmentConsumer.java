@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class ProfileEditFragmentConsumer extends Fragment implements IPermissionRequest {
-    private IConsumerAdapterListener listener;
+    private IConsumerListener listener;
     private Consumer consumer;
     private ImageView imageView;
     private String directoryName;
@@ -44,7 +44,7 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listener = (IConsumerAdapterListener) getActivity();
+        listener = (IConsumerListener) getActivity();
         View root = inflater.inflate(R.layout.fragment_profile_consumer_edit, container, false);
 
         ContextWrapper cw = new ContextWrapper(getContext());

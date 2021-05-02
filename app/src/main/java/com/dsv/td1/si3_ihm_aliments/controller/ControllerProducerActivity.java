@@ -9,23 +9,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.PopupWindow;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,8 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
+import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
@@ -43,7 +35,6 @@ import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileEditFragmentProducer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockAddProductFragmentProducer;
@@ -52,10 +43,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
-public class ControllerProducerActivity extends AppCompatActivity implements IProducerAdapterListener, IAdapterListener, IPermissionRequest {
+public class ControllerProducerActivity extends AppCompatActivity implements IProducerListener, IAdapterListener, IPermissionRequest {
 
     private Bitmap picture;
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
@@ -100,6 +90,11 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 ft.commit();
                 break;
         }
+    }
+
+    @Override
+    public void deleteReservation(Reservation reservation) {
+        Model_Consumer.getInstance().getConsumerList().get(0).getReservations().remove(reservation);
     }
 
 

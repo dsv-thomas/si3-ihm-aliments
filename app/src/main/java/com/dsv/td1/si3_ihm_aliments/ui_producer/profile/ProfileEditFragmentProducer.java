@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class ProfileEditFragmentProducer extends Fragment implements IPermissionRequest {
-    private IProducerAdapterListener listener;
+    private IProducerListener listener;
     private Producer producer;
     private ImageView imageView;
     private String directoryName;
@@ -47,7 +47,7 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        listener = (IProducerAdapterListener) getActivity();
+        listener = (IProducerListener) getActivity();
         View root = inflater.inflate(R.layout.fragment_producer_profile_edit, container, false);
 
         ContextWrapper cw = new ContextWrapper(getContext());

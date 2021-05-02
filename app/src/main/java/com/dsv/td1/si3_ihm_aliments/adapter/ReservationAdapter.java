@@ -1,6 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class ReservationAdapter extends BaseAdapter {
             maVue = mInflater.inflate(R.layout.reservation_layout, null);
         }
 
-       Log.d("RESERVATION", String.valueOf(listView.size()));
         Log.d("RESERVATION", String.valueOf(listView.size()));
 
         TextView nom = maVue.findViewById(R.id.nameProductReservation);
@@ -58,28 +59,30 @@ public class ReservationAdapter extends BaseAdapter {
         TextView quantity = maVue.findViewById(R.id.quantityProductReservation);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
         TextView date = maVue.findViewById(R.id.schedulePickupPointReservation);
-        ImageView imageView = maVue.findViewById(R.id.imageProduct); //TODO: image
-        Button button = maVue.findViewById(R.id.reservation); //TODO: ANNULER
+        ImageView imageView = maVue.findViewById(R.id.imageProduct);
+        Button button = maVue.findViewById(R.id.deleteReservation);
 
-        //imageView.setImageResource(); //TODO: product picture
+
+
         nom.setText(listView.get(position).getProduct().getName());
         id.setText(listView.get(position).getId().toString());
         quantity.setText(String.valueOf(listView.get(position).getQuantity()));
         place.setText(listView.get(position).getPickupPoint().getPlace());
-        //date.setText((CharSequence) listView.get(position).getPickupPoint());
-        //place.setText(listView.get(position).getPlace()); //TODO: place picture
+
+        date.setText(listView.get(position).getPickupPoint().getDate().toString());
+
+        ContextWrapper cw = new ContextWrapper(contexte);
+        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, listView.get(position).getProduct().getImageName()));
 
 
-/*
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("Réservation","position="+position+"listener"+ listener);
-            //    if(listener!=null) listener.onButtonShowPopupWindowClick(v, listView.get(position));
+                if(listener!=null) listener.deleteReservation(listView.get(position));
             }
         });
-
-*/
 
         return maVue;
     }

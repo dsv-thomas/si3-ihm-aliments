@@ -34,23 +34,16 @@ public class GPSTrackerConsumer implements LocationListener {
 
     /**
      * Function to get the user's current location
-     *
      * @return
      */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
             Log.v("isGPSEnabled", "=" + isGPSEnabled);
-
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-
             Log.v("isNetworkEnabled", "=" + isNetworkEnabled);
-
             if (isGPSEnabled == false && isNetworkEnabled == false) {
-                // no network provider is enabled
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
@@ -70,7 +63,6 @@ public class GPSTrackerConsumer implements LocationListener {
                             }
                         }
                     }
-
                     if (isGPSEnabled) {
                         location = null;
                         if (location == null) {
@@ -90,13 +82,10 @@ public class GPSTrackerConsumer implements LocationListener {
                         }
                     }
                 }
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return location;
     }
 
@@ -149,10 +138,8 @@ public class GPSTrackerConsumer implements LocationListener {
      */
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");
-
         // Setting Dialog Message
         alertDialog
                 .setMessage("GPS is not enabled. Do you want to go to settings menu?");
@@ -181,8 +168,8 @@ public class GPSTrackerConsumer implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-
-
+        this.location = location;
+        Log.d("test", "test");
     }
 
     @Override
@@ -197,5 +184,3 @@ public class GPSTrackerConsumer implements LocationListener {
     public void onStatusChanged(String provider, int status, Bundle extras) {
     }
 }
-
-

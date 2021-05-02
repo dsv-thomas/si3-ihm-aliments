@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.PopupWindow;
@@ -24,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -33,7 +33,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
-import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
@@ -49,8 +49,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import static com.dsv.td1.si3_ihm_aliments.MainActivity.CHANNEL_ID;
 
-public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerAdapterListener, IAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
+
+public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerListener, IAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
 
     private Bitmap picture;
     private ProfileEditFragmentConsumer profileEditFragmentConsumer;
@@ -58,9 +60,11 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_consumer);
         try {
-            Log.d("CONTROLLERACTIVITY", "nb observers=" + Model_Producer.getInstance().countObservers());
+            Log.d("CONTROLLERACTIVITY2", "nb observers=" + Model_Producer.getInstance().countObservers());
+
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -74,18 +78,9 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-        findViewById(R.id.submitForm).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String title = findViewById(R.id.dateReservation).toString();
-                String message = "Nouvelle réservation enregistrée";
-                sendNotificationOnChannel(title,
-                        message,
-                        CHANNEL_1_ID,
-                        NotificationCompat.PRIORITY_DEFAULT);
-            }
-        });
+
     }
+
 
     @Override
     public void onClickItemListView(int position, int action) {
@@ -164,6 +159,13 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
                 Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
+
+                String title = spinner.getSelectedItem().toString();
+                String message = "Nouvelle réservation enregistrée";
+                sendNotificationOnChannel(title,
+                        message,
+                        CHANNEL_ID,
+                        NotificationCompat.PRIORITY_DEFAULT);
 
                 popupWindow.dismiss();
             }
@@ -272,12 +274,19 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         return picture;
     }
 
-    private void sendNotificationOnChannel(String title, String message, String channelId, int priority){
+    @Override
+    public void deleteReservation(Reservation reservation) {
+        Model_Consumer.getInstance().getConsumerList().get(0).getReservations().remove(reservation);
+    }
+
+    private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
+        Log.d("MODIFICAITON", "test");
         NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
                 .setSmallIcon(R.drawable.bonuspack_bubble)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(priority);
         notification.setSmallIcon(R.drawable.bonuspack_bubble);
+        NotificationManagerCompat.from(this).notify(1, notification.build());
     }
 }

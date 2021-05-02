@@ -1,6 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.util.List;
@@ -53,9 +55,12 @@ public class ProducerAdapter extends BaseAdapter {
         TextView nom = maVue.findViewById(R.id.nameProducer);
         TextView place = maVue.findViewById(R.id.placeProducer);
         TextView pNumber = maVue.findViewById(R.id.PnumberProducer);
-        ImageView imageView = maVue.findViewById(R.id.avatarProducer); //TODO: image
+        ImageView imageView = maVue.findViewById(R.id.avatarProducer);
 
-        //imageView.setImageResource(); //TODO: Profile picture
+        ContextWrapper cw = new ContextWrapper(contexte);
+        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
+        //imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, listView.get(position).getUuid().toString()));
+
         nom.setText(listView.get(position).getName());
         place.setText(listView.get(position).getPlace());
         pNumber.setText(listView.get(position).getpNumber());

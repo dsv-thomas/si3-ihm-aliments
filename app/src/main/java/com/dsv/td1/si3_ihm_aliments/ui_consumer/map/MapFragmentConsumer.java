@@ -84,7 +84,8 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         //create a new item to draw on the map
         //your items
         ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-        OverlayItem home = new OverlayItem("F. Rallo", "nos bureaux", new GeoPoint(43.65020, 7.00517));
+
+        OverlayItem home = new OverlayItem("Votre position", "", new GeoPoint(43.65020, 7.00517));
         Drawable m = home.getMarker(0);
         items.add(home); // Lat/Lon decimal degrees
 
@@ -108,39 +109,6 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         return root;
     }
 
-
-    private void addOverlay(GeoPoint geoPoint) {
-        //create a new item to draw on the map
-        //your items
-        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
-        OverlayItem home = new OverlayItem("F. Rallo", "nos bureaux", new GeoPoint(43.65020, 7.00517));
-        Drawable m = home.getMarker(0);
-
-        items.add(home); // Lat/Lon decimal degrees
-        items.add(new OverlayItem("Votre position", "", geoPoint)); // Lat/Lon decimal degrees
-
-        //the Place icons on the map with a click listener
-        ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getActivity().getApplicationContext(), items,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                    @Override
-                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        //do something
-                        return true;
-                    }
-
-                    @Override
-                    public boolean onItemLongPress(final int index, final OverlayItem item) {
-                        return false;
-                    }
-                });
-
-        mOverlay.setFocusItemsOnTap(true);
-        map.getOverlays().add(mOverlay);
-    }
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,20 +120,12 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
     @Override
     public void onResume() {
         super.onResume();
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
         map.onResume(); //needed for compass, my location overlays, v6.0.0 and up
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //this will refresh the osmdroid configuration on resuming.
-        //if you make changes to the configuration, use
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //Configuration.getInstance().save(this, prefs);
         map.onPause();  //needed for compass, my location overlays, v6.0.0 and up
     }
 }

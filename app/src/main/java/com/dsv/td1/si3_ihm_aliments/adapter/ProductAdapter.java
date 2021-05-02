@@ -26,7 +26,7 @@ public class ProductAdapter extends BaseAdapter {
     private Context contexte;
     private List<Product> listView;
     private IAdapterListener iAdapterListener;
-    private IConsumerAdapterListener iConsumerAdapterListener;
+    private IConsumerListener iConsumerListener;
     private Producer currentProducer;
 
     public ProductAdapter(Context contexte, List listView) {
@@ -71,10 +71,13 @@ public class ProductAdapter extends BaseAdapter {
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
-        //place.setText(listView.get(position).getPlace()); //TODO: place picture
+        //place.setText(listView.get(position).getPlace()); //TODO: place
+
+
 
         //Remove reservation button
-        if(parent.toString().contains("consumer_reservation")) {
+        Log.d("INFO", parent.toString());
+        if(parent.toString().contains("listStockForProducer")) {
             reservationButton.setVisibility(View.GONE);
         }
         reservationButton.setOnClickListener(new View.OnClickListener() {

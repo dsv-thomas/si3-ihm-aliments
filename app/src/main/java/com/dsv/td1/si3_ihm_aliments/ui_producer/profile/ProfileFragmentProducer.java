@@ -16,14 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
-import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
-import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
 public class ProfileFragmentProducer extends Fragment {
-    IProducerAdapterListener listener;
+    IProducerListener listener;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -31,7 +30,7 @@ public class ProfileFragmentProducer extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_producer, container, false);
 
-        listener = (IProducerAdapterListener) getActivity();
+        listener = (IProducerListener) getActivity();
         TextView nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
         TextView locationProducerPage = root.findViewById(R.id.locationProducerPage);
         TextView telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
