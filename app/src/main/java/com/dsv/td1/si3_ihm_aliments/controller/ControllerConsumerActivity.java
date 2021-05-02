@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.PopupWindow;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -41,12 +43,12 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
-import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileFragmentConsumer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+
 
 public class ControllerConsumerActivity extends AppCompatActivity implements IConsumerAdapterListener, IAdapterListener, AdapterView.OnItemSelectedListener, IPermissionRequest {
 
@@ -72,6 +74,17 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        findViewById(R.id.submitForm).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String title = findViewById(R.id.dateReservation).toString();
+                String message = "Nouvelle réservation enregistrée";
+                sendNotificationOnChannel(title,
+                        message,
+                        CHANNEL_1_ID,
+                        NotificationCompat.PRIORITY_DEFAULT);
+            }
+        });
     }
 
     @Override
@@ -151,6 +164,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
                 Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
+
                 popupWindow.dismiss();
             }
         });
@@ -256,5 +270,14 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public Bitmap getPictureToSave() {
         return picture;
+    }
+
+    private void sendNotificationOnChannel(String title, String message, String channelId, int priority){
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
+                .setSmallIcon(R.drawable.bonuspack_bubble)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(priority);
+        notification.setSmallIcon(R.drawable.bonuspack_bubble);
     }
 }
