@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
@@ -47,13 +49,13 @@ public class ProfileFragmentProducer extends Fragment {
 
         textView.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
 
- //       ListView listView = root.findViewById(R.id.consumer_reservation);
-  //      ReservationAdapter reservationAdapter = new ReservationAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
+        ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
+        PickupPointAdapter pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
 
-//        listView.setAdapter(reservationAdapter);
+        listView.setAdapter(pickupPointAdapter);
 
-        //productAdapter.addListener((IConsumerAdapterListener) getContext());
+        //pickupPointAdapter.addListener((IConsumerAdapterListener) getContext());
 
 
         return root;
