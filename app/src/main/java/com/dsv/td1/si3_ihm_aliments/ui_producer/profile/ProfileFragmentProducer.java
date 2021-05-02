@@ -32,7 +32,9 @@ public class ProfileFragmentProducer extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_producer, container, false);
 
         listener = (IProducerAdapterListener) getActivity();
-        TextView textView = root.findViewById(R.id.nameProducerProfil);
+        TextView nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
+        TextView locationProducerPage = root.findViewById(R.id.locationProducerPage);
+        TextView telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
         ImageView imageView = root.findViewById(R.id.avatarProducer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
@@ -47,7 +49,9 @@ public class ProfileFragmentProducer extends Fragment {
             }
         });
 
-        textView.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+        nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+        locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
+        telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
