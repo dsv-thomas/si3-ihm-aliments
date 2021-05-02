@@ -34,7 +34,7 @@ public class ProfileFragmentProducer extends Fragment {
         ImageView imageView = root.findViewById(R.id.avatarProducer);
         ContextWrapper cw = new ContextWrapper(getContext());
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
 
         Button button = root.findViewById(R.id.submitForm);
 
