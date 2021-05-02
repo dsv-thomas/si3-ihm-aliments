@@ -2,6 +2,7 @@ package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
@@ -19,6 +20,7 @@ public interface IProducerAdapterListener {
 
     void onSubmitaddProductClicked(Producer producer, Bundle bundle);
 
+    void onButtonShowPopupAddPickupPointClick(View view);
 
 //    void onButtonClicked(int action);
 }

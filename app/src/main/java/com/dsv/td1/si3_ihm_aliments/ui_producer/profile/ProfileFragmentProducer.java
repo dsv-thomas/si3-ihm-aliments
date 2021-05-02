@@ -55,6 +55,14 @@ public class ProfileFragmentProducer extends Fragment {
 
         listView.setAdapter(pickupPointAdapter);
 
+        Button addPickupoint = root.findViewById(R.id.addNewPickupPoint);
+
+        addPickupoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onButtonShowPopupAddPickupPointClick(getView());
+            }
+        });
         //pickupPointAdapter.addListener((IConsumerAdapterListener) getContext());
 
 

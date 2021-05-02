@@ -5,8 +5,19 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.PopupWindow;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,6 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavBackStackEntry;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -22,7 +34,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerAdapterListener;
+import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
+import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
+import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
@@ -34,11 +50,17 @@ import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockAddProductFragmentPro
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+
 public class ControllerProducerActivity extends AppCompatActivity implements IProducerAdapterListener, IAdapterListener, IPermissionRequest {
 
     private Bitmap picture;
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
     private ProfileEditFragmentProducer profileEditFragmentProducer;
+    private String lacurrentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +78,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         NavController navController = Navigation.findNavController(this, R.id.nav_host_producer_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        lacurrentLayout = navController.getCurrentBackStackEntry().toString();
     }
 
 
@@ -85,7 +108,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         profileEditFragmentProducer = new ProfileEditFragmentProducer(Model_Producer.getInstance().getProducerList().get(0));
         ft.add(R.id.nav_host_producer_fragment, profileEditFragmentProducer);
-        ft.addToBackStack("setting");
+        ft.addToBackStack("profileEdit");
         ft.commit();
     }
 
@@ -94,7 +117,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         stockAddProductFragmentProducer = new StockAddProductFragmentProducer(Model_Producer.getInstance().getProducerList().get(0));
         ft.add(R.id.nav_host_producer_fragment, stockAddProductFragmentProducer);
-        ft.addToBackStack("add");
+        ft.addToBackStack("stockAddProduct");
         ft.commit();
     }
 
@@ -111,8 +134,8 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         producer.setName(bundle.get("name").toString());
         producer.setPlace(bundle.get("location").toString());
         producer.setpNumber(bundle.get("number").toString());
-        getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-       // getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
     }
 
     @Override
@@ -188,6 +211,61 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     }
 
     @Override
+    public void onButtonShowPopupAddPickupPointClick(View view) {
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.pickuppoint_popup, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm");
+
+        //TODO: Exemple
+        EditText place = popupView.findViewById(R.id.editTextMultiLinePlacePickupPoint);
+        EditText date = popupView.findViewById(R.id.editTextDatePickupPoint);
+        EditText time = popupView.findViewById(R.id.editTextTimePickupPoint);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        Button confirmPickupPoint = popupView.findViewById(R.id.confirmPickupPoint);
+        confirmPickupPoint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Producer producer = Model_Producer.getInstance().getProducerList().get(0);
+                Date dateFormat = null;
+                try {
+                    dateFormat = simpleDateFormat.parse(date.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Date timeFormat = null;
+                try {
+                    timeFormat = simpleTimeFormat.parse(time.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(place.getText().toString(), dateFormat, timeFormat));
+                popupWindow.dismiss();
+            }
+        });
+
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    @Override
     public void onProfilPictureLoad(Bitmap bitmap) {
         profileEditFragmentProducer.setImage(bitmap);
     }
@@ -210,6 +288,9 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
             super.onBackPressed();
             //additional code
         } else {
+            if(getSupportFragmentManager().findFragmentByTag("profileEdit") != null) {
+                getSupportFragmentManager().popBackStackImmediate(lacurrentLayout,0);
+            }
             getSupportFragmentManager().popBackStack();
         }
     }
