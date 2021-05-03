@@ -66,12 +66,14 @@ public class ProductAdapter extends BaseAdapter {
 
         TextView nom = maVue.findViewById(R.id.nameProduct);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
+        TextView price = maVue.findViewById(R.id.priceProduct);
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button reservationButton = maVue.findViewById(R.id.reservation);
         ContextWrapper cw = new ContextWrapper(contexte);
         String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
+        price.setText(listView.get(position).getPricePerKg() + "€ le kg");
         //place.setText(listView.get(position).getPlace()); //TODO: place
 
 
