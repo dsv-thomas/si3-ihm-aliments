@@ -34,6 +34,7 @@ public class GPSTrackerConsumer implements LocationListener {
 
     /**
      * Function to get the user's current location
+     *
      * @return
      */
     public Location getLocation() {
@@ -169,7 +170,6 @@ public class GPSTrackerConsumer implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         this.location = location;
-        Log.d("test", "test");
     }
 
     @Override

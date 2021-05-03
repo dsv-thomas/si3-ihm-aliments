@@ -1,7 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.ui_consumer.profile;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,7 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
         textView = root.findViewById(R.id.nameConsumerPage);
         imageView = root.findViewById(R.id.avatarConsumer);
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
 
         Button button = root.findViewById(R.id.submitForm);
@@ -50,26 +49,20 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
             }
         });
 
-
-        Log.d("RESSERVATIONS ", String.valueOf(Model_Consumer.getInstance().getConsumerList().get(0).getReservations().size()));
         ListView listView = root.findViewById(R.id.consumer_reservation);
         reservationAdapter = new ReservationAdapter(getContext(), Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
         reservationAdapter.addListener((IAdapterListener) getActivity());
         listView.setAdapter(reservationAdapter);
-
 
         return root;
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        Log.d("UPDATE", "UPDATE");
-        //reservationAdapter.clearList();
         reservationAdapter.updateList(Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
         reservationAdapter.notifyDataSetChanged();
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
     }
 }
-

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-
 import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
@@ -35,10 +34,9 @@ public class ProducerFragmentConsumer extends Fragment implements Observer {
         return root;
     }
 
-
     @Override
     public void update(Observable o, Object arg) {
-      //  producerAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
-      //  producerAdapter.notifyDataSetChanged();
+        producerAdapter.updateList(Model_Producer.getInstance().getProducerList());
+        producerAdapter.notifyDataSetChanged();
     }
 }

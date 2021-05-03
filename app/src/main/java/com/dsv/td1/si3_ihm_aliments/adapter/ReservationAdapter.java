@@ -53,8 +53,6 @@ public class ReservationAdapter extends BaseAdapter {
             maVue = mInflater.inflate(R.layout.reservation_layout, null);
         }
 
-        Log.d("RESERVATION", String.valueOf(listView.size()));
-
         TextView nom = maVue.findViewById(R.id.nameProductReservation);
         TextView id = maVue.findViewById(R.id.idReservation);
         TextView quantity = maVue.findViewById(R.id.quantityProductReservation);
@@ -72,15 +70,12 @@ public class ReservationAdapter extends BaseAdapter {
 
         date.setText(listView.get(position).getPickupPoint().getDate().toString());
 
-        ContextWrapper cw = new ContextWrapper(contexte);
-        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, listView.get(position).getProduct().getImageName()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), listView.get(position).getProduct().getImageName()));
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Réservation","position="+position+"listener"+ listener);
                 if(listener!=null) listener.deleteReservation(listView.get(position));
             }
         });
@@ -92,15 +87,7 @@ public class ReservationAdapter extends BaseAdapter {
         listener = aListener;
     }
 
-    public void clearList() {
-        listView.clear();
-    }
-
     public void updateList(List<Reservation> list) {
         listView = list;
-        Log.d("LISTUPDATE", String.valueOf(list.size()));
     }
-
-
-
 }

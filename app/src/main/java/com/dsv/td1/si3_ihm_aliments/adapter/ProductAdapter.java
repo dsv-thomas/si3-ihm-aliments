@@ -69,9 +69,8 @@ public class ProductAdapter extends BaseAdapter {
         TextView price = maVue.findViewById(R.id.priceProduct);
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button reservationButton = maVue.findViewById(R.id.reservation);
-        ContextWrapper cw = new ContextWrapper(contexte);
-        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
+
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
         price.setText(listView.get(position).getPricePerKg() + "€ le kg");
         //place.setText(listView.get(position).getPlace()); //TODO: place
@@ -79,14 +78,13 @@ public class ProductAdapter extends BaseAdapter {
 
 
         //Remove reservation button
-        Log.d("INFO", parent.toString());
+
         if(parent.toString().contains("listStockForProducer")) {
             reservationButton.setVisibility(View.GONE);
         }
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Réservation","position="+position+"listener"+ iAdapterListener);
                 if(iAdapterListener !=null) iAdapterListener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
             }
         });
@@ -94,7 +92,6 @@ public class ProductAdapter extends BaseAdapter {
         maVue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ADAPTER","position="+position+"listener"+ iAdapterListener);
                 if (iAdapterListener !=null) iAdapterListener.onClickItemListView(position, ACTION_CLICK_PRODUCT);
             }
         });
@@ -107,6 +104,5 @@ public class ProductAdapter extends BaseAdapter {
 
     public void updateList(List<Product> list) {
         listView = list;
-        Log.d("LISTUPDATE", String.valueOf(list.size()));
     }
 }

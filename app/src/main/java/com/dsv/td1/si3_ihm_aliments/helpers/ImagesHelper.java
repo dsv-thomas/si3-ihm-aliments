@@ -11,7 +11,6 @@ import java.io.FileNotFoundException;
 
 public class ImagesHelper {
 
-
     public static Bitmap loadImageFromStorage(String directoryName, String filename) {
         try {
             File f = new File(directoryName, filename + ".jpg");

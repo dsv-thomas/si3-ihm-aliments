@@ -2,7 +2,6 @@ package com.dsv.td1.si3_ihm_aliments.ui_producer.stock;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ public class StockFragmentProducer extends Fragment implements Observer {
                              ViewGroup container, Bundle savedInstanceState) {
         iProducerListener = (IProducerListener) getActivity();
         Model_Producer.getInstance().addObserver(this);
-        Log.d("onCreateView", "onCreateView");
 
         View root = inflater.inflate(R.layout.fragment_stock_producer, container, false);
         listView1 = root.findViewById(R.id.listStockForProducer);
@@ -55,7 +53,6 @@ public class StockFragmentProducer extends Fragment implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Log.d("TSETTESTSETSE", "UPDATE");
         productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
         productAdapter.notifyDataSetChanged();
     }

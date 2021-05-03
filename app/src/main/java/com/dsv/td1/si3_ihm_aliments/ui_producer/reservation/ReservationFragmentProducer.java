@@ -24,19 +24,18 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
     IProducerListener iProducerListener;
     ReservationAdapter reservationAdapter;
 
-        public View onCreateView(@NonNull LayoutInflater inflater,
-                                 ViewGroup container, Bundle savedInstanceState) {
-            View root = inflater.inflate(R.layout.fragment_reservation_producer, container, false);
-            Model_Consumer.getInstance().addObserver(this);
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_reservation_producer, container, false);
+        Model_Consumer.getInstance().addObserver(this);
 
-            reservationAdapter = new ReservationAdapter(this.getContext(), Model_Consumer.getInstance().reservationsForProducer(Model_Producer.getInstance().getProducerList().get(0)));
-            ListView listView = root.findViewById(R.id.listViewReservationProducer);
+        reservationAdapter = new ReservationAdapter(this.getContext(), Model_Consumer.getInstance().reservationsForProducer(Model_Producer.getInstance().getProducerList().get(0)));
+        ListView listView = root.findViewById(R.id.listViewReservationProducer);
 
-            reservationAdapter.addListener((IAdapterListener) getActivity());
-            listView.setAdapter(reservationAdapter);
-            return root;
-        }
-
+        reservationAdapter.addListener((IAdapterListener) getActivity());
+        listView.setAdapter(reservationAdapter);
+        return root;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
