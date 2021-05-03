@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -116,8 +117,10 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
         NumberPicker numberPicker = popupView.findViewById(R.id.quantityReservation);
         numberPicker.setMaxValue(20);
-        numberPicker.setMinValue(0);
-        numberPicker.setValue(0);
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
 
         Spinner spinner = popupView.findViewById(R.id.pickupPoints);
         ArrayAdapter<PickupPoint> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, producer.getPickupPoints());

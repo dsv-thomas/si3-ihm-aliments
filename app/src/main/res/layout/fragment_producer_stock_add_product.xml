@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Quantitée"
+        android:hint="Quantité"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/editTextProductNameAddProductProducer"
         app:layout_constraintTop_toBottomOf="@+id/editTextProductNameAddProductProducer" />
