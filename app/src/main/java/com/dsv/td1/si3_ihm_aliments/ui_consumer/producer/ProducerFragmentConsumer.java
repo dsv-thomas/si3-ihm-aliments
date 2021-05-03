@@ -16,14 +16,18 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProducerAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class ProducerFragmentConsumer extends Fragment {
+import java.util.Observable;
+import java.util.Observer;
+
+public class ProducerFragmentConsumer extends Fragment implements Observer {
     IProducerListener iProducerListener;
+    ProducerAdapter producerAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_producer_consumer, container, false);
-
-        ProducerAdapter producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
+        Model_Producer.getInstance().addObserver(this);
+        producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
         ListView listView = root.findViewById(R.id.listViewProducer);
         listView.setAdapter(producerAdapter);
 
@@ -32,4 +36,9 @@ public class ProducerFragmentConsumer extends Fragment {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+      //  producerAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
+      //  producerAdapter.notifyDataSetChanged();
+    }
 }

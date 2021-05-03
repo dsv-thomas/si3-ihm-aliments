@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
@@ -100,5 +101,10 @@ public class ProductAdapter extends BaseAdapter {
 
     public void addListener(IAdapterListener aListener) {
         iAdapterListener = aListener;
+    }
+
+    public void updateList(List<Product> list) {
+        listView = list;
+        Log.d("LISTUPDATE", String.valueOf(list.size()));
     }
 }

@@ -1,5 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.model;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
@@ -41,7 +42,21 @@ public class Model_Consumer extends Observable {
     }
 
     public void addProductForReservation(Consumer consumer, Reservation reservation) {
+        Log.d("addProductForReservation", "addProductForReservation");
         consumer.addReservation(reservation);
+        setChanged();
+        notifyObservers(consumer);
+    }
+
+    public void removeProductFromReservation(Consumer consumer, Reservation reservation) {
+        Log.d("remove", "removeReservation");
+        consumer.getReservations().remove(reservation);
+        setChanged();
+        notifyObservers(consumer);
+    }
+
+    public void modifyProfile(Consumer consumer, Bundle bundle) {
+        consumer.setName(bundle.get("name").toString());
         setChanged();
         notifyObservers(consumer);
     }
