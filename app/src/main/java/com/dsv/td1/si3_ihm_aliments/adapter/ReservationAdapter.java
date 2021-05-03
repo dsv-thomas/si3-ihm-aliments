@@ -15,6 +15,7 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationAdapter extends BaseAdapter {
@@ -90,4 +91,16 @@ public class ReservationAdapter extends BaseAdapter {
     public void addListener(IAdapterListener aListener) {
         listener = aListener;
     }
+
+    public void clearList() {
+        listView.clear();
+    }
+
+    public void updateList(List<Reservation> list) {
+        listView = list;
+        Log.d("LISTUPDATE", String.valueOf(list.size()));
+    }
+
+
+
 }

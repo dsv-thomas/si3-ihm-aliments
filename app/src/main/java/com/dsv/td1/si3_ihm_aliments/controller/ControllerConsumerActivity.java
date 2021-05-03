@@ -185,16 +185,15 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         profileEditFragmentConsumer = new ProfileEditFragmentConsumer(Model_Consumer.getInstance().getConsumerList().get(0));
         ft.add(R.id.nav_host_consumer_fragment, profileEditFragmentConsumer);
-        ft.addToBackStack("setting");
+        ft.addToBackStack("profileEdit");
         ft.commit();
     }
 
     @Override
     public void onSubmitSettingsClicked(Consumer consumer, Bundle bundle) {
         //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
-        consumer.setName(bundle.get("name").toString());
-        getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragmentConsumer()).addToBackStack(null).commit();
+        Model_Consumer.getInstance().modifyProfile(consumer, bundle);
+        getSupportFragmentManager().popBackStack("profileEdit", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
 
@@ -276,7 +275,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        Model_Consumer.getInstance().getConsumerList().get(0).getReservations().remove(reservation);
+        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0),reservation);
     }
 
     private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {

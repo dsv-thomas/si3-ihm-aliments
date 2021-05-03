@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
+import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 
 import java.util.List;
 
@@ -75,5 +76,10 @@ public class PickupPointAdapter extends BaseAdapter {
 
     public void addListener(IAdapterListener aListener) {
         listener = aListener;
+    }
+
+    public void updateList(List<PickupPoint> list) {
+        listView = list;
+        Log.d("LISTUPDATE", String.valueOf(list.size()));
     }
 }

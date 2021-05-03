@@ -21,23 +21,31 @@ import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class ProfileFragmentProducer extends Fragment {
-    IProducerListener listener;
+import java.util.Observable;
+import java.util.Observer;
 
+public class ProfileFragmentProducer extends Fragment implements Observer {
+    IProducerListener listener;
+    PickupPointAdapter pickupPointAdapter;
+    TextView nameProducerProfil;
+    TextView locationProducerPage;
+    TextView telNumberProducerPage;
+    ImageView imageView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_producer, container, false);
+        Model_Producer.getInstance().addObserver(this);
 
         listener = (IProducerListener) getActivity();
-        TextView nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
-        TextView locationProducerPage = root.findViewById(R.id.locationProducerPage);
-        TextView telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
-        ImageView imageView = root.findViewById(R.id.avatarProducer);
-        ContextWrapper cw = new ContextWrapper(getContext());
-        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+         nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
+         locationProducerPage = root.findViewById(R.id.locationProducerPage);
+         telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
+         imageView = root.findViewById(R.id.avatarProducer);
+
+
+
 
         Button button = root.findViewById(R.id.submitForm);
 
@@ -51,10 +59,11 @@ public class ProfileFragmentProducer extends Fragment {
         nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
-        PickupPointAdapter pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+        pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
 
         listView.setAdapter(pickupPointAdapter);
 
@@ -79,4 +88,15 @@ public class ProfileFragmentProducer extends Fragment {
         //textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+        pickupPointAdapter.notifyDataSetChanged();
+
+        //UpdateProfile
+        nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+        locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
+        telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+    }
 }

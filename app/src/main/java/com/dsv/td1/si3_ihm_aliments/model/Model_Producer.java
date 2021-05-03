@@ -1,5 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.model;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
@@ -8,6 +9,7 @@ import com.dsv.td1.si3_ihm_aliments.producer.Maraiche;
 import com.dsv.td1.si3_ihm_aliments.producer.Poissonnier;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Poisson;
+import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +55,21 @@ public class Model_Producer extends Observable {
         producerList.add(producer);
         setChanged();
         notifyObservers(producer);
+    }
+
+    public void addProduct(Producer producer, Product product) {
+        producer.addProducts(product);
+        setChanged();
+        notifyObservers(producer);
+    }
+
+    public void modifyProfile(Producer producer, Bundle bundle) {
+        producer.setName(bundle.get("name").toString());
+        producer.setpNumber(bundle.get("number").toString());
+        producer.setPlace(bundle.get("location").toString());
+        setChanged();
+        notifyObservers(producer);
+        //producer.setBio(bundle.get("isBio").toString());
     }
 
 

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -94,7 +95,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        Model_Consumer.getInstance().getConsumerList().get(0).getReservations().remove(reservation);
+        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0),reservation);
     }
 
 
@@ -119,18 +120,16 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     @Override
     public void onSubmitaddProductClicked(Producer producer, Bundle bundle) {
         MaraicheFactory maraicheFactory = new MaraicheFactory();
-        producer.addProducts(maraicheFactory.buildProduct(bundle.get("editTextProductName").toString(), bundle.get("editTextProductQuantity").toString(), bundle.get("editTextProductPrice").toString(), bundle.get("productImageName").toString()));
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new StockFragmentProducer()).addToBackStack(null).commit();
+        Model_Producer.getInstance().addProduct(producer, maraicheFactory.buildProduct(bundle.get("editTextProductName").toString(), bundle.get("editTextProductQuantity").toString(), bundle.get("editTextProductPrice").toString(), bundle.get("productImageName").toString()));
+        getSupportFragmentManager().popBackStack("stockAddProduct", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     @Override
     public void onSubmitSettingsClicked(Producer producer, Bundle bundle) {
         //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
-        producer.setName(bundle.get("name").toString());
-        producer.setPlace(bundle.get("location").toString());
-        producer.setpNumber(bundle.get("number").toString());
-        getSupportFragmentManager().popBackStack();
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
+        Model_Producer.getInstance().modifyProfile(producer, bundle);
+        getSupportFragmentManager().popBackStack("profileEdit", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_producer_fragment, new ProfileFragmentProducer()).addToBackStack(null).commit();
     }
 
     @Override
