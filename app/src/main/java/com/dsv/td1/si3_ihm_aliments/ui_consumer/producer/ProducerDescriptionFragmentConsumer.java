@@ -29,8 +29,14 @@ public class ProducerDescriptionFragmentConsumer extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         listener = (IAdapterListener) getActivity();
         View root = inflater.inflate(R.layout.fragment_profile_producer_for_consumer, container, false);
-        TextView textView = root.findViewById(R.id.nameProducerPage);
-        textView.setText(producer.getName());
+        TextView textViewName = root.findViewById(R.id.nameProducerPage);
+        textViewName.setText(producer.getName());
+        TextView textViewLocation = root.findViewById(R.id.locationProducerPage);
+        textViewLocation.setText(producer.getPlace());
+        /*
+        TextView textViewNumber = root.findViewById(R.id.telNumberProducerPage);
+        textViewNumber.setText(producer.getpNumber());
+         */
 
         ListView listView1 = root.findViewById(R.id.pickupPointList);
         PickupPointAdapter pickupPointAdapter = new PickupPointAdapter(getContext(), producer.getPickupPoints());
