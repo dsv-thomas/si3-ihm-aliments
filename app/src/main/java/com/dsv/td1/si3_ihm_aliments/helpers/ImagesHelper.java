@@ -1,5 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.helpers;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -17,5 +19,11 @@ public class ImagesHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getDirName(Context context) {
+        ContextWrapper cw = new ContextWrapper(context);
+        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
+        return directoryName;
     }
 }

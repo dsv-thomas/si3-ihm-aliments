@@ -45,9 +45,7 @@ import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFrag
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 import static com.dsv.td1.si3_ihm_aliments.MainActivity.CHANNEL_ID;
 
@@ -62,12 +60,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main_consumer);
-        try {
-            Log.d("CONTROLLERACTIVITY2", "nb observers=" + Model_Producer.getInstance().countObservers());
 
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -86,9 +79,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     public void onClickItemListView(int position, int action) {
         FragmentTransaction ft;
         switch (action) {
-            case ACTION_CLICK_PRODUCT:
-
-                break;
             case ACTION_CLICK_PRODUCER:
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
@@ -101,7 +91,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        Log.d("BACK", String.valueOf(count));
         if (count == 0) {
             super.onBackPressed();
             //additional code
@@ -127,25 +116,13 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
         NumberPicker numberPicker = popupView.findViewById(R.id.quantityReservation);
         numberPicker.setMaxValue(20);
-        numberPicker.setMinValue(0);
-        numberPicker.setValue(0);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
 
-        //TODO: Exemple
-        try {
-            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint("Carrefour Antibes", simpleDateFormat.parse("28/04/2021"), simpleDateFormat1.parse("17:00")));
-            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint("Carrefour Market", simpleDateFormat.parse("28/04/2021"), simpleDateFormat1.parse("17:00")));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         Spinner spinner = popupView.findViewById(R.id.pickupPoints);
         ArrayAdapter<PickupPoint> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, producer.getPickupPoints());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-
-        Log.d("PICKUPPOINT", Arrays.toString(producer.getPickupPoints().toArray()));
 
         textView.setText(product.getName());
 
@@ -155,7 +132,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         confirmReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("RESERVATION", product.getName() + " " + Model_Consumer.getInstance().getConsumerList().get(0).getName());
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
                 Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
@@ -185,16 +161,15 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         profileEditFragmentConsumer = new ProfileEditFragmentConsumer(Model_Consumer.getInstance().getConsumerList().get(0));
         ft.add(R.id.nav_host_consumer_fragment, profileEditFragmentConsumer);
-        ft.addToBackStack("setting");
+        ft.addToBackStack("profileEdit");
         ft.commit();
     }
 
     @Override
     public void onSubmitSettingsClicked(Consumer consumer, Bundle bundle) {
         //Model_Consumer.getInstance().modifyName(consumer, bundle.get("name").toString());
-        consumer.setName(bundle.get("name").toString());
-        getSupportFragmentManager().popBackStack("setting", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        //getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_consumer_fragment, new ProfileFragmentConsumer()).addToBackStack(null).commit();
+        Model_Consumer.getInstance().modifyProfile(consumer, bundle);
+        getSupportFragmentManager().popBackStack("profileEdit", FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
 
@@ -276,11 +251,10 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        Model_Consumer.getInstance().getConsumerList().get(0).getReservations().remove(reservation);
+        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0), reservation);
     }
 
     private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
-        Log.d("MODIFICAITON", "test");
         NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
                 .setSmallIcon(R.drawable.bonuspack_bubble)
                 .setContentTitle(title)

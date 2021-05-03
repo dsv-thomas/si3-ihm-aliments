@@ -28,7 +28,7 @@
         android:text="Valider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTimePickupPoint" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeEndPickupPoint" />
 
     <EditText
         android:id="@+id/editTextMultiLinePlacePickupPoint"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextMultiLinePlacePickupPoint" />
 
     <EditText
-        android:id="@+id/editTextTimePickupPoint"
+        android:id="@+id/editTextTimeStartPickupPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -63,6 +63,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDatePickupPoint" />
+
+    <EditText
+        android:id="@+id/editTextTimeEndPickupPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimeStartPickupPoint" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

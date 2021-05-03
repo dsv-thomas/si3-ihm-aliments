@@ -10,29 +10,30 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.dsv.td1.si3_ihm_aliments.R;
 
+import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
-public class StockFragmentProducer extends Fragment {
+import java.util.Observable;
+import java.util.Observer;
+
+public class StockFragmentProducer extends Fragment implements Observer {
     IProducerListener iProducerListener;
+    ProductAdapter productAdapter;
+    ListView listView1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         iProducerListener = (IProducerListener) getActivity();
+        Model_Producer.getInstance().addObserver(this);
 
         View root = inflater.inflate(R.layout.fragment_stock_producer, container, false);
+        listView1 = root.findViewById(R.id.listStockForProducer);
 
-
-        ListView listView1 = root.findViewById(R.id.listStockForProducer);
-        ProductAdapter productAdapter = new ProductAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getProposedProducts(), Model_Producer.getInstance().getProducerList().get(0));
-        productAdapter.addListener((IAdapterListener) getActivity());
-        listView1.setAdapter(productAdapter);
-
-
+        stockListView();
         Button addProduct = root.findViewById(R.id.addProductProducer);
 
         addProduct.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +42,18 @@ public class StockFragmentProducer extends Fragment {
                 iProducerListener.onAddProductClicked();
             }
         });
-
         return root;
+    }
+
+    public void stockListView() {
+        productAdapter = new ProductAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getProposedProducts(), Model_Producer.getInstance().getProducerList().get(0));
+        productAdapter.addListener((IAdapterListener) getActivity());
+        listView1.setAdapter(productAdapter);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
+        productAdapter.notifyDataSetChanged();
     }
 }

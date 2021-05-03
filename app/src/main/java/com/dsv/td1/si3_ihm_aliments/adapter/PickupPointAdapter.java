@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
@@ -50,8 +48,6 @@ public class PickupPointAdapter extends BaseAdapter {
             maVue = mInflater.inflate(R.layout.pickuppoint_layout, null);
         }
 
-       Log.d("RESERVATION", String.valueOf(listView.size()));
-
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
         TextView date = maVue.findViewById(R.id.datePickupPointLayout);
         TextView schedule = maVue.findViewById(R.id.schedulePickupPointReservation);
@@ -60,20 +56,14 @@ public class PickupPointAdapter extends BaseAdapter {
         date.setText(listView.get(position).getDate().toString());
         schedule.setText(listView.get(position).getSchedule().toString());
 
-/*
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Réservation","position="+position+"listener"+ listener);
-            //    if(listener!=null) listener.onButtonShowPopupWindowClick(v, listView.get(position));
-            }
-        });
-
-*/
         return maVue;
     }
 
     public void addListener(IAdapterListener aListener) {
         listener = aListener;
+    }
+
+    public void updateList(List<PickupPoint> list) {
+        listView = list;
     }
 }

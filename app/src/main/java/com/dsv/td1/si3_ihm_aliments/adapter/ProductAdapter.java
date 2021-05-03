@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
@@ -65,34 +66,26 @@ public class ProductAdapter extends BaseAdapter {
 
         TextView nom = maVue.findViewById(R.id.nameProduct);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
+        TextView price = maVue.findViewById(R.id.priceProduct);
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button reservationButton = maVue.findViewById(R.id.reservation);
-        ContextWrapper cw = new ContextWrapper(contexte);
-        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, currentProducer.getProposedProducts().get(position).getImageName()));
+
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
+        price.setText(listView.get(position).getPricePerKg() + "€ le kg");
         //place.setText(listView.get(position).getPlace()); //TODO: place
 
 
 
         //Remove reservation button
-        Log.d("INFO", parent.toString());
+
         if(parent.toString().contains("listStockForProducer")) {
             reservationButton.setVisibility(View.GONE);
         }
         reservationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Réservation","position="+position+"listener"+ iAdapterListener);
                 if(iAdapterListener !=null) iAdapterListener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
-            }
-        });
-
-        maVue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("ADAPTER","position="+position+"listener"+ iAdapterListener);
-                if (iAdapterListener !=null) iAdapterListener.onClickItemListView(position, ACTION_CLICK_PRODUCT);
             }
         });
         return maVue;
@@ -100,5 +93,9 @@ public class ProductAdapter extends BaseAdapter {
 
     public void addListener(IAdapterListener aListener) {
         iAdapterListener = aListener;
+    }
+
+    public void updateList(List<Product> list) {
+        listView = list;
     }
 }

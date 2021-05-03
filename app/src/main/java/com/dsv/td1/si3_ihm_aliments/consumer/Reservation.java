@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Reservation {
-    private UUID id;
+    private String id;
     private Consumer consumer;
     private Producer producer;
     private Product product;
@@ -16,7 +16,7 @@ public class Reservation {
     private PickupPoint pickupPoint;
 
     public Reservation(Consumer consumer, Producer producer, Product product, int quantity, PickupPoint pickupPoint) {
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString().substring(0,5);
         this.consumer = consumer;
         this.producer = producer;
         this.product = product;
@@ -26,7 +26,7 @@ public class Reservation {
     }
 
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
