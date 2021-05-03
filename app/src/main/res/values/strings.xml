@@ -8,4 +8,5 @@
     <string name="intro_client">Client</string>
     <string name="title_reservation_producer">Réservations</string>
     <string name="title_stock">Stock</string>
+    <string name="trier_par">Trier par :</string>
 </resources>
