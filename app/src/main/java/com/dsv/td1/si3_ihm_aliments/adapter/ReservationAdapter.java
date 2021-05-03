@@ -56,8 +56,11 @@ public class ReservationAdapter extends BaseAdapter {
         TextView nom = maVue.findViewById(R.id.nameProductReservation);
         TextView id = maVue.findViewById(R.id.idReservation);
         TextView quantity = maVue.findViewById(R.id.quantityProductReservation);
+        TextView unitPrice = maVue.findViewById(R.id.priceProductReservation);
+        TextView totalPrice = maVue.findViewById(R.id.priceReservation);
         TextView place = maVue.findViewById(R.id.pickupPointReservationLayout);
-        TextView date = maVue.findViewById(R.id.schedulePickupPointReservation);
+        TextView date = maVue.findViewById(R.id.datePickupPointReservation);
+        TextView time = maVue.findViewById(R.id.timePickupPointReservation);
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button button = maVue.findViewById(R.id.deleteReservation);
 
@@ -65,10 +68,14 @@ public class ReservationAdapter extends BaseAdapter {
 
         nom.setText(listView.get(position).getProduct().getName());
         id.setText(listView.get(position).getId().toString());
+        unitPrice.setText(String.valueOf(listView.get(position).getProduct().getPricePerKg()));
         quantity.setText(String.valueOf(listView.get(position).getQuantity()));
+        int countTotalPrice = listView.get(position).getQuantity() * Integer.parseInt(listView.get(position).getProduct().getPricePerKg());
+        totalPrice.setText(String.valueOf(countTotalPrice));
         place.setText(listView.get(position).getPickupPoint().getPlace());
 
         date.setText(listView.get(position).getPickupPoint().getDate().toString());
+        time.setText(listView.get(position).getPickupPoint().getSchedule().toString());
 
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), listView.get(position).getProduct().getImageName()));
 

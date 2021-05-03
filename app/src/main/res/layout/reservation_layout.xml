@@ -29,27 +29,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dateReservation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
-        android:text="Lundi 28 avril"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/imageProduct"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/priceReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="4dp"
-        android:text="2€"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="2"
         android:textColor="#009688"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/quantityProductReservation"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/idReservation" />
 
     <Button
@@ -63,21 +52,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="Réservation n°"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/dateReservation"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/idReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="28dp"
         android:text="4545 45 45"
         android:textSize="12sp"
@@ -85,44 +63,146 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/quantityProductReservation"
+        android:id="@+id/dateReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="Lundi 28 avril"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
+        android:text="Réservation n°"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/dateReservation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/priceProductReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="5kg"
+        android:text="5"
         android:textColor="#009688"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/nameProductReservation"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/quantityProductReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/outline_pin_drop_24" />
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="5"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/priceProductReservation"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/pickupPointReservationLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="88dp"
         android:text="Carrefour Antibes"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/schedulePickupPointReservation"
+        android:id="@+id/timePickupPointReservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="27/04/21"
+        app:layout_constraintStart_toEndOf="@+id/datePickupPointReservation"
+        app:layout_constraintTop_toBottomOf="@+id/pickupPointReservationLayout" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="88dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/outline_pin_drop_24" />
+
+    <TextView
+        android:id="@+id/datePickupPointReservation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="27/04/21"
         app:layout_constraintStart_toStartOf="@+id/pickupPointReservationLayout"
         app:layout_constraintTop_toBottomOf="@+id/pickupPointReservationLayout" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/imageProduct"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/outline_confirmation_number_24" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="8dp"
+        android:text="Total :"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/quantityProductReservation"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="KG"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/quantityProductReservation"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="€"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/priceReservation"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="€"
+        android:textColor="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/priceProductReservation"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

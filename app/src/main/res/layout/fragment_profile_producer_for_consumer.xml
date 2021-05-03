@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/avatarConsumer"
+            android:id="@+id/avatarProducer"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginStart="40dp"

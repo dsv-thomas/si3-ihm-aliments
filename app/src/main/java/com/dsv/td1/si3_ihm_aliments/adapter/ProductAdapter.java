@@ -86,13 +86,6 @@ public class ProductAdapter extends BaseAdapter {
                 if(iAdapterListener !=null) iAdapterListener.onButtonShowPopupWindowClick(v, listView.get(position), currentProducer);
             }
         });
-
-        maVue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (iAdapterListener !=null) iAdapterListener.onClickItemListView(position, ACTION_CLICK_PRODUCT);
-            }
-        });
         return maVue;
     }
 

@@ -70,12 +70,6 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     public void onClickItemListView(int position, int action) {
         FragmentTransaction ft;
         switch (action) {
-            case ACTION_CLICK_PRODUCT:
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
-                ft.addToBackStack(null);
-                ft.commit();
-                break;
             case ACTION_CLICK_PRODUCER:
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
