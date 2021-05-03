@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -45,10 +44,6 @@ import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFrag
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-
 import static com.dsv.td1.si3_ihm_aliments.MainActivity.CHANNEL_ID;
 
 
@@ -62,12 +57,7 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main_consumer);
-        try {
-            Log.d("CONTROLLERACTIVITY2", "nb observers=" + Model_Producer.getInstance().countObservers());
 
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -101,7 +91,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        Log.d("BACK", String.valueOf(count));
         if (count == 0) {
             super.onBackPressed();
             //additional code
@@ -129,23 +118,11 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         numberPicker.setMaxValue(20);
         numberPicker.setMinValue(0);
         numberPicker.setValue(0);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
 
-        //TODO: Exemple
-        try {
-            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint("Carrefour Antibes", simpleDateFormat.parse("28/04/2021"), simpleDateFormat1.parse("17:00")));
-            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint("Carrefour Market", simpleDateFormat.parse("28/04/2021"), simpleDateFormat1.parse("17:00")));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         Spinner spinner = popupView.findViewById(R.id.pickupPoints);
         ArrayAdapter<PickupPoint> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, producer.getPickupPoints());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
-
-        Log.d("PICKUPPOINT", Arrays.toString(producer.getPickupPoints().toArray()));
 
         textView.setText(product.getName());
 
@@ -155,7 +132,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         confirmReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("RESERVATION", product.getName() + " " + Model_Consumer.getInstance().getConsumerList().get(0).getName());
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
                 Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
@@ -275,11 +251,10 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0),reservation);
+        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0), reservation);
     }
 
     private void sendNotificationOnChannel(String title, String message, String channelId, int priority) {
-        Log.d("MODIFICAITON", "test");
         NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), channelId)
                 .setSmallIcon(R.drawable.bonuspack_bubble)
                 .setContentTitle(title)

@@ -1,7 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.ui_consumer.producer;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,6 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
-import com.dsv.td1.si3_ihm_aliments.producer.Maraiche;
-import com.dsv.td1.si3_ihm_aliments.producer.Poissonnier;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.util.Observable;
@@ -25,10 +22,10 @@ import java.util.Observer;
 
 public class ProducerDescriptionFragmentConsumer extends Fragment implements Observer {
 
-    private Producer producer;
-    private IAdapterListener listener;
     ProductAdapter productAdapter;
     PickupPointAdapter pickupPointAdapter;
+    private Producer producer;
+    private IAdapterListener listener;
 
     public ProducerDescriptionFragmentConsumer(Producer producer) {
         this.producer = producer;
@@ -63,10 +60,10 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
 
     @Override
     public void update(Observable o, Object arg) {
-            productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
-            productAdapter.notifyDataSetChanged();
+        productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
+        productAdapter.notifyDataSetChanged();
 
-            pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
-            pickupPointAdapter.notifyDataSetChanged();
+        pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+        pickupPointAdapter.notifyDataSetChanged();
     }
 }

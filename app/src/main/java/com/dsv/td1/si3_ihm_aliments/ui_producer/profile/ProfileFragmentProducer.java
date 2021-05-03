@@ -1,9 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.ui_producer.profile;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +36,10 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         Model_Producer.getInstance().addObserver(this);
 
         listener = (IProducerListener) getActivity();
-         nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
-         locationProducerPage = root.findViewById(R.id.locationProducerPage);
-         telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
-         imageView = root.findViewById(R.id.avatarProducer);
-
-
+        nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
+        locationProducerPage = root.findViewById(R.id.locationProducerPage);
+        telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
+        imageView = root.findViewById(R.id.avatarProducer);
 
 
         Button button = root.findViewById(R.id.submitForm);
@@ -59,7 +54,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
@@ -82,13 +77,6 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("RESUME", "RESUME");
-        //textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
-    }
-
-    @Override
     public void update(Observable o, Object arg) {
         pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
         pickupPointAdapter.notifyDataSetChanged();
@@ -97,6 +85,6 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getContext()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
     }
 }

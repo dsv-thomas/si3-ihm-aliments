@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
+import com.dsv.td1.si3_ihm_aliments.product.Product;
 
 import java.util.List;
 
@@ -57,9 +58,8 @@ public class ProducerAdapter extends BaseAdapter {
         TextView pNumber = maVue.findViewById(R.id.PnumberProducer);
         ImageView imageView = maVue.findViewById(R.id.avatarProducer);
 
-        ContextWrapper cw = new ContextWrapper(contexte);
-        String directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
-        //imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(directoryName, listView.get(position).getUuid().toString()));
+
+        //imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(, listView.get(position).getUuid().toString()));
 
         nom.setText(listView.get(position).getName());
         place.setText(listView.get(position).getPlace());
@@ -68,10 +68,7 @@ public class ProducerAdapter extends BaseAdapter {
         maVue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ADAPTER","position="+position+"listener"+ listener);
-
                 if (listener!=null) listener.onClickItemListView(position, ACTION_CLICK_PRODUCER);
-
             }
         });
         return maVue;
@@ -79,5 +76,9 @@ public class ProducerAdapter extends BaseAdapter {
 
     public void addListener(IAdapterListener aListener) {
         listener = aListener;
+    }
+
+    public void updateList(List<Producer> list) {
+        listView = list;
     }
 }

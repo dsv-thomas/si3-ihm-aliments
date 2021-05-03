@@ -19,9 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static NotificationManager notificationManager;
 
     private void createNotificationChannel(){
-        Log.d("dfsfsdfdsfsd", "tes");
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            Log.d("LDLDLDLLDLD", "test");
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Channel Panier Gourmand",
                     NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("Channel pour l'application des producteurs de sa région");
@@ -35,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         createNotificationChannel();
-        Log.d("dfsfsdfdsfsd", "");
         findViewById(R.id.start_client).setOnClickListener(click-> {
             Intent intent = new Intent(getApplicationContext(), ControllerConsumerActivity.class);
             startActivity(intent);

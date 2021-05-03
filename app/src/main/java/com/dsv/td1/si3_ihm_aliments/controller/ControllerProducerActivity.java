@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -37,9 +36,7 @@ import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 import com.dsv.td1.si3_ihm_aliments.product.Product;
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFragmentConsumer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileEditFragmentProducer;
-import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileFragmentProducer;
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockAddProductFragmentProducer;
-import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.ParseException;
@@ -57,11 +54,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_producer);
-        try {
-            Log.d("CONTROLLERACTIVITY", "nb observers=" + Model_Producer.getInstance().countObservers());
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
+
         BottomNavigationView navView = findViewById(R.id.nav_view_producer);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_reservation_producer, R.id.navigation_stock_producer, R.id.navigation_profile_producer)
@@ -78,7 +71,6 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         FragmentTransaction ft;
         switch (action) {
             case ACTION_CLICK_PRODUCT:
-                Log.d("CONTROLLER", "position=" + position);
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
                 ft.addToBackStack(null);
@@ -95,7 +87,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
 
     @Override
     public void deleteReservation(Reservation reservation) {
-        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0),reservation);
+        Model_Consumer.getInstance().removeProductFromReservation(Model_Consumer.getInstance().getConsumerList().get(0), reservation);
     }
 
 
@@ -277,14 +269,9 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        Log.d("BACK", String.valueOf(count));
         if (count == 0) {
             super.onBackPressed();
-            //additional code
         } else {
-            if(getSupportFragmentManager().findFragmentByTag("profileEdit") != null) {
-                getSupportFragmentManager().popBackStackImmediate(lacurrentLayout,0);
-            }
             getSupportFragmentManager().popBackStack();
         }
     }

@@ -106,7 +106,7 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
         imageView.setImageBitmap(bitmap);
     }
 
-    public void saveToInternalStorage( Bitmap picture) {
+    public void saveToInternalStorage(Bitmap picture) {
         OutputStream outputStream = null;
         try {
             File file = new File(directoryName, consumer.getUuid().toString() + ".jpg");
@@ -126,6 +126,4 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
             e.printStackTrace();
         }
     }
-
-
 }
