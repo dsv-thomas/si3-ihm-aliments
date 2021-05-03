@@ -127,8 +127,8 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
         NumberPicker numberPicker = popupView.findViewById(R.id.quantityReservation);
         numberPicker.setMaxValue(20);
-        numberPicker.setMinValue(0);
-        numberPicker.setValue(0);
+        numberPicker.setMinValue(1);
+        numberPicker.setValue(1);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
 
