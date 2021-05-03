@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IAdapterListener;
 import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.adapter.ProductAdapter;
+import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
@@ -40,6 +43,8 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
         textViewName.setText(producer.getName());
         TextView textViewLocation = root.findViewById(R.id.locationProducerPage);
         textViewLocation.setText(producer.getPlace());
+        ImageView imageView = root.findViewById(R.id.avatarProducer);
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), producer.getUuid().toString()));
         /*
         TextView textViewNumber = root.findViewById(R.id.telNumberProducerPage);
         textViewNumber.setText(producer.getpNumber());

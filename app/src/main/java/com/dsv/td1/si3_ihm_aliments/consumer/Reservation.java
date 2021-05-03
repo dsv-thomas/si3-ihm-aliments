@@ -16,7 +16,7 @@ public class Reservation {
     private PickupPoint pickupPoint;
 
     public Reservation(Consumer consumer, Producer producer, Product product, int quantity, PickupPoint pickupPoint) {
-        this.id = UUID.randomUUID().toString().substring(5);
+        this.id = UUID.randomUUID().toString().substring(0,5);
         this.consumer = consumer;
         this.producer = producer;
         this.product = product;

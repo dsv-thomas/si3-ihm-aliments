@@ -79,9 +79,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
     public void onClickItemListView(int position, int action) {
         FragmentTransaction ft;
         switch (action) {
-            case ACTION_CLICK_PRODUCT:
-
-                break;
             case ACTION_CLICK_PRODUCER:
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.add(R.id.nav_host_consumer_fragment, new ProducerDescriptionFragmentConsumer(Model_Producer.getInstance().getProducerList().get(position)));
@@ -121,8 +118,6 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
         numberPicker.setMaxValue(20);
         numberPicker.setMinValue(1);
         numberPicker.setValue(1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm");
 
         Spinner spinner = popupView.findViewById(R.id.pickupPoints);
         ArrayAdapter<PickupPoint> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, producer.getPickupPoints());
