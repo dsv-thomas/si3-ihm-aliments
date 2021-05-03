@@ -214,7 +214,8 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         //TODO: Exemple
         EditText place = popupView.findViewById(R.id.editTextMultiLinePlacePickupPoint);
         EditText date = popupView.findViewById(R.id.editTextDatePickupPoint);
-        EditText time = popupView.findViewById(R.id.editTextTimePickupPoint);
+        EditText timeS = popupView.findViewById(R.id.editTextTimeStartPickupPoint);
+        EditText timeE = popupView.findViewById(R.id.editTextTimeEndPickupPoint);
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -230,14 +231,16 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Date timeFormat = null;
+                Date timeFormatS = null;
+                Date timeFormatE = null;
                 try {
-                    timeFormat = simpleTimeFormat.parse(time.getText().toString());
+                    timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
+                    timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
-                Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(place.getText().toString(), dateFormat, timeFormat));
+                Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(place.getText().toString(), dateFormat, timeFormatS, timeFormatE));
                 popupWindow.dismiss();
             }
         });

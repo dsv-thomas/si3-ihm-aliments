@@ -45,6 +45,8 @@ import com.dsv.td1.si3_ihm_aliments.ui_consumer.producer.ProducerDescriptionFrag
 import com.dsv.td1.si3_ihm_aliments.ui_consumer.profile.ProfileEditFragmentConsumer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.SimpleDateFormat;
+
 import static com.dsv.td1.si3_ihm_aliments.MainActivity.CHANNEL_ID;
 
 
