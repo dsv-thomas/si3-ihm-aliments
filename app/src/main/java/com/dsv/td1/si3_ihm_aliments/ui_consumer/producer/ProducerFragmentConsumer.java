@@ -35,7 +35,9 @@ public class ProducerFragmentConsumer extends Fragment implements Observer {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_producer_consumer, container, false);
+
         Model_Producer.getInstance().addObserver(this);
+
         producerAdapter = new ProducerAdapter(this.getContext(), Model_Producer.getInstance().getProducerList());
         ListView listView = root.findViewById(R.id.listViewProducer);
         listView.setAdapter(producerAdapter);
@@ -62,7 +64,6 @@ public class ProducerFragmentConsumer extends Fragment implements Observer {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
