@@ -44,7 +44,7 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
         TextView textViewLocation = root.findViewById(R.id.locationProducerPage);
         textViewLocation.setText(producer.getPlace());
         ImageView imageView = root.findViewById(R.id.avatarProducer);
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), producer.getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), producer.getUuid().toString()));
         /*
         TextView textViewNumber = root.findViewById(R.id.telNumberProducerPage);
         textViewNumber.setText(producer.getpNumber());

@@ -70,7 +70,7 @@ public class ProductAdapter extends BaseAdapter {
         ImageView imageView = maVue.findViewById(R.id.imageProduct);
         Button reservationButton = maVue.findViewById(R.id.reservation);
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), currentProducer.getProposedProducts().get(position).getImageName()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(contexte, ImagesHelper.getDirName(contexte), currentProducer.getProposedProducts().get(position).getImageName()));
         nom.setText(listView.get(position).getName());
         price.setText(listView.get(position).getPricePerKg() + "€ le kg");
         //place.setText(listView.get(position).getPlace()); //TODO: place

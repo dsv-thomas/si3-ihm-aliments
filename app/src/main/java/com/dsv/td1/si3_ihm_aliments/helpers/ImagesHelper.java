@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Picture;
+
+import com.dsv.td1.si3_ihm_aliments.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +14,12 @@ import java.io.FileNotFoundException;
 
 public class ImagesHelper {
 
-    public static Bitmap loadImageFromStorage(String directoryName, String filename) {
+    public static Bitmap loadImageFromStorage(Context context, String directoryName, String filename) {
         try {
             File f = new File(directoryName, filename + ".jpg");
+            if(!f.exists()) {
+                return BitmapFactory.decodeResource(context.getResources(), R.drawable.nopicture);
+            }
             return BitmapFactory.decodeStream(new FileInputStream(f));
         } catch (FileNotFoundException e) {
             e.printStackTrace();

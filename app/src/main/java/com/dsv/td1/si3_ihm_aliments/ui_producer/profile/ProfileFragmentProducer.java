@@ -54,7 +54,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
@@ -85,6 +85,6 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
     }
 }

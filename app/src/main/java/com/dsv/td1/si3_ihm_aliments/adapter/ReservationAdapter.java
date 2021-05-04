@@ -77,7 +77,7 @@ public class ReservationAdapter extends BaseAdapter {
         date.setText(listView.get(position).getPickupPoint().getDate().toString());
         time.setText(listView.get(position).getPickupPoint().getSchedule().toString());
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(contexte), listView.get(position).getProduct().getImageName()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(contexte, ImagesHelper.getDirName(contexte), listView.get(position).getProduct().getImageName()));
 
 
         button.setOnClickListener(new View.OnClickListener() {

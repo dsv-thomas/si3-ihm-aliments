@@ -37,7 +37,7 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
         textView = root.findViewById(R.id.nameConsumerPage);
         imageView = root.findViewById(R.id.avatarConsumer);
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
 
         Button button = root.findViewById(R.id.submitForm);
@@ -62,7 +62,7 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
         reservationAdapter.updateList(Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
         reservationAdapter.notifyDataSetChanged();
 
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
         textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
     }
 }
