@@ -40,7 +40,7 @@ public class Model_Consumer extends Observable {
     public void addProductForReservation(Consumer consumer, Reservation reservation) {
         consumer.addReservation(reservation);
         setChanged();
-        notifyObservers(consumer);
+        notifyObservers("reservation");
     }
 
     public void removeProductFromReservation(Consumer consumer, Reservation reservation) {
@@ -52,7 +52,7 @@ public class Model_Consumer extends Observable {
     public void modifyProfile(Consumer consumer, Bundle bundle) {
         consumer.setName(bundle.get("name").toString());
         setChanged();
-        notifyObservers(consumer);
+        notifyObservers("modifyprofile");
     }
 
     public List<Consumer> getConsumerList() {

@@ -2,6 +2,8 @@ package com.dsv.td1.si3_ihm_aliments.helpers;
 
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Cache;
 import com.android.volley.Network;
 import com.android.volley.Request;
@@ -25,7 +27,7 @@ import org.osmdroid.util.GeoPoint;
 import java.io.File;
 import java.util.Date;
 
-public class LocalisationFinder {
+public class LocalisationFinder extends AppCompatActivity {
 
     private JSONArray jsonArray;
 
@@ -62,7 +64,6 @@ public class LocalisationFinder {
                             Log.d("APICALL", String.valueOf(jsonObject[0].getJSONObject("geometry").getJSONArray("coordinates")));
                             jsonArray = jsonObject[0].getJSONObject("geometry").getJSONArray("coordinates");
                             Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(producer, place, date, time, time2, new GeoPoint(Double.parseDouble(jsonArray.get(1).toString()), Double.parseDouble(jsonArray.get(0).toString()))));
-                            Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -75,8 +75,7 @@ public class ProductAdapter extends BaseAdapter {
         price.setText(listView.get(position).getPricePerKg() + "€ le kg");
         //place.setText(listView.get(position).getPlace()); //TODO: place
 
-
-
+        
         //Remove reservation button
 
         if(parent.toString().contains("listStockForProducer")) {

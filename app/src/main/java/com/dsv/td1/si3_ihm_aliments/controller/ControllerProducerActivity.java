@@ -246,6 +246,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 }
 
                 Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
+                Log.d("OKOKOK", String.valueOf(getApplicationContext()));
                 popupWindow.dismiss();
             }
         });

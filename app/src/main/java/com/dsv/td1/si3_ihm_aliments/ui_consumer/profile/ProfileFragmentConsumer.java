@@ -31,6 +31,7 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile_consumer, container, false);
+
         Model_Consumer.getInstance().addObserver(this);
         listener = (IConsumerListener) getActivity();
 
@@ -59,10 +60,15 @@ public class ProfileFragmentConsumer extends Fragment implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        reservationAdapter.updateList(Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
-        reservationAdapter.notifyDataSetChanged();
-
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
-        textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
+        if(arg != null) {
+            if (arg.toString().contains("reservation")) {
+                reservationAdapter.updateList(Model_Consumer.getInstance().getConsumerList().get(0).getReservations());
+                reservationAdapter.notifyDataSetChanged();
+            }
+                if (arg.toString().contains("modifyprofile")) {
+                imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Consumer.getInstance().getConsumerList().get(0).getUuid().toString()));
+                textView.setText(Model_Consumer.getInstance().getConsumerList().get(0).getName());
+            }
+        }
     }
 }

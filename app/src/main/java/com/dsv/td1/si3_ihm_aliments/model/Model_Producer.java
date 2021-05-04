@@ -35,7 +35,7 @@ public class Model_Producer extends Observable {
     public void addPickupPoint(Producer producer, PickupPoint pickupPoint) {
         producer.addPickUpPoint(pickupPoint);
         setChanged();
-        notifyObservers(producer);
+        notifyObservers("addpickupoint");
     }
 
     public void addProducer(Producer producer) {
@@ -47,7 +47,7 @@ public class Model_Producer extends Observable {
     public void addProduct(Producer producer, Product product) {
         producer.addProducts(product);
         setChanged();
-        notifyObservers(producer);
+        notifyObservers("addproduct");
     }
 
     public void modifyProfile(Producer producer, Bundle bundle) {
@@ -55,7 +55,7 @@ public class Model_Producer extends Observable {
         producer.setpNumber(bundle.get("number").toString());
         producer.setPlace(bundle.get("location").toString());
         setChanged();
-        notifyObservers(producer);
+        notifyObservers("profile");
         //producer.setBio(bundle.get("isBio").toString());
     }
 

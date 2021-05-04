@@ -18,6 +18,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.PickupPointAdapter;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -78,13 +79,19 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
-        pickupPointAdapter.notifyDataSetChanged();
+        if(arg != null) {
+            if(arg.toString().contains("addpickupoint")) {
+                pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+                pickupPointAdapter.notifyDataSetChanged();
+            }
+            //UpdateProfile
+            if(arg.toString().contains("profile")) {
+                nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+                locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
+                telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
+                imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+            }
+        }
 
-        //UpdateProfile
-        nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
-        locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
-        telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
     }
 }
