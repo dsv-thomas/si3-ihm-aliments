@@ -56,8 +56,17 @@ public class ProducerAdapter extends BaseAdapter {
         TextView nom = maVue.findViewById(R.id.nameProducer);
         TextView place = maVue.findViewById(R.id.placeProducer);
         TextView pNumber = maVue.findViewById(R.id.PnumberProducer);
+        ImageView priceIcon = maVue.findViewById(R.id.priceIconProducer);
         ImageView imageView = maVue.findViewById(R.id.avatarProducer);
 
+        int iconNumber = listView.get(position).getIconNumber();
+        if(iconNumber == 1) {
+            priceIcon.setImageResource(R.drawable.euro);
+        } else if(iconNumber == 2) {
+            priceIcon.setImageResource(R.drawable.euro2);
+        } else {
+            priceIcon.setImageResource(R.drawable.euro3);
+        }
 
         //imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(, listView.get(position).getUuid().toString()));
 
