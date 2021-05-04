@@ -25,7 +25,7 @@ import java.util.Observer;
 public class ProfileFragmentProducer extends Fragment implements Observer {
     IProducerListener listener;
     PickupPointAdapter pickupPointAdapter;
-    TextView nameProducerProfil;
+    TextView nameProducerProfile;
     TextView locationProducerPage;
     TextView telNumberProducerPage;
     ImageView imageView;
@@ -37,7 +37,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         Model_Producer.getInstance().addObserver(this);
 
         listener = (IProducerListener) getActivity();
-        nameProducerProfil = root.findViewById(R.id.nameProducerProfil);
+        nameProducerProfile = root.findViewById(R.id.nameProducerProfil);
         locationProducerPage = root.findViewById(R.id.locationProducerPage);
         telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
         imageView = root.findViewById(R.id.avatarProducer);
@@ -52,7 +52,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
             }
         });
 
-        nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+        nameProducerProfile.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
@@ -86,12 +86,11 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
             }
             //UpdateProfile
             if(arg.toString().contains("profile")) {
-                nameProducerProfil.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
+                nameProducerProfile.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
                 locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
                 telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
                 imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
             }
         }
-
     }
 }
