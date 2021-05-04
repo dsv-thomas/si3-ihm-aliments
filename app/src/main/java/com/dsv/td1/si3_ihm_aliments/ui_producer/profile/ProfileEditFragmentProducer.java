@@ -14,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +30,7 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import java.io.File;
@@ -83,6 +87,26 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
         } else {
             listener.onProfilPictureLoad(ImagesHelper.loadImageFromStorage(getActivity(), directoryName, producer.getUuid().toString()));
         }
+
+
+        CheckBox chkEdit = root.findViewById(R.id.buttonBioEdit);
+        EditText chkProfile = root.findViewById(R.id.buttonBioProfil);
+
+        chkEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                // Check which checkbox was clicked
+                if (checked){
+                    producer.setBio(!producer.isBio());
+                    //chkProfile.setText("Certifié Bio");
+                }
+                else{
+                    //chkProfile.setText(" ");
+                }
+            }
+        });
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
