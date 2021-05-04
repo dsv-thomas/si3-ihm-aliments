@@ -1,5 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.consumer;
 
+import com.dsv.td1.si3_ihm_aliments.producer.Producer;
+
 import org.osmdroid.util.GeoPoint;
 
 import java.text.DateFormat;
@@ -13,13 +15,8 @@ public class PickupPoint {
     private Date scheduleStart;
     private Date scheduleEnd;
     private GeoPoint geoPoint;
+    private Producer producer;
 
-    public PickupPoint(String place, Date date, Date scheduleS, Date scheduleE) {
-        this.place = place;
-        this.date = date;
-        this.scheduleStart = scheduleS;
-        this.scheduleEnd = scheduleE;
-    }
 
     public PickupPoint(String place, Date date, Date scheduleStart, Date scheduleEnd, GeoPoint geoPoint) {
         this.place = place;
@@ -27,6 +24,19 @@ public class PickupPoint {
         this.scheduleStart = scheduleStart;
         this.scheduleEnd = scheduleEnd;
         this.geoPoint = geoPoint;
+    }
+
+    public PickupPoint(Producer producer, String place, Date date, Date scheduleStart, Date scheduleEnd, GeoPoint geoPoint) {
+        this.producer = producer;
+        this.place = place;
+        this.date = date;
+        this.scheduleStart = scheduleStart;
+        this.scheduleEnd = scheduleEnd;
+        this.geoPoint = geoPoint;
+    }
+
+    public Producer getProducer() {
+        return producer;
     }
 
     public String getPlace() {

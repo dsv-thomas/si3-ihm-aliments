@@ -12,6 +12,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
+import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
@@ -60,7 +61,7 @@ public class LocalisationFinder {
                             jsonObject[0] = (JSONObject) object.getJSONArray("features").get(0);
                             Log.d("APICALL", String.valueOf(jsonObject[0].getJSONObject("geometry").getJSONArray("coordinates")));
                             jsonArray = jsonObject[0].getJSONObject("geometry").getJSONArray("coordinates");
-                            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(place, date, time, time2, new GeoPoint(Double.parseDouble(jsonArray.get(1).toString()), Double.parseDouble(jsonArray.get(0).toString()))));
+                            Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(producer, place, date, time, time2, new GeoPoint(Double.parseDouble(jsonArray.get(1).toString()), Double.parseDouble(jsonArray.get(0).toString()))));
                             Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
                         } catch (JSONException e) {
                             e.printStackTrace();

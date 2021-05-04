@@ -89,13 +89,10 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
 
         for (PickupPoint pickupPoint: Model_Producer.getInstance().getPickupPoints()) {
-            OverlayItem home = new OverlayItem(pickupPoint.getPlace(), pickupPoint.getDate()+pickupPoint.getDate(), pickupPoint.getGeoPoint());
+            OverlayItem home = new OverlayItem(pickupPoint.getProducer().getName(), pickupPoint.getProducer().getPlace() + " \n "+pickupPoint.getSchedule(), pickupPoint.getGeoPoint());
             Drawable m = home.getMarker(0);
             items.add(home); // Lat/Lon decimal degrees
         }
-
-
-
 
         //the Place icons on the map with a click listener
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getActivity().getApplicationContext(), items,
