@@ -56,7 +56,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ControllerProducerActivity extends AppCompatActivity implements IProducerListener, IAdapterListener, IPermissionRequest{
+public class ControllerProducerActivity extends AppCompatActivity implements IProducerListener, IAdapterListener, IPermissionRequest {
 
     private Bitmap picture;
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
@@ -215,8 +215,8 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         // create the popup window
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm");
@@ -238,29 +238,21 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
             public void onClick(View v) {
 
                 Producer producer = Model_Producer.getInstance().getProducerList().get(0);
-                Date dateFormat = null;
+                Date dateFormat;
+                Date timeFormatS;
+                Date timeFormatE;
                 try {
                     dateFormat = simpleDateFormat.parse(date.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                Date timeFormatS = null;
-                Date timeFormatE = null;
-                try {
                     timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
                     timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                try {
                     LocalisationFinder localisationFinder = new LocalisationFinder();
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
+                    popupWindow.dismiss();
+                } catch (ParseException | JSONException e) {
+                    Toast.makeText(ControllerProducerActivity.this,
+                            "Veuillez correctement renseigner tous les champs", Toast.LENGTH_SHORT).show();
                 }
-
-                Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
-                popupWindow.dismiss();
             }
         });
 
@@ -320,7 +312,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String dateText = dayOfMonth+"/"+(++month)+"/"+year;
+                String dateText = dayOfMonth + "/" + (++month) + "/" + year;
                 date.setText(dateText);
             }
         };
@@ -334,7 +326,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String timeText = hourOfDay + ":" + minute;
+                        String timeText = hourOfDay + ":" + (minute < 10 ? "0" : "") + minute;
                         time.setText(timeText);
                     }
                 };
