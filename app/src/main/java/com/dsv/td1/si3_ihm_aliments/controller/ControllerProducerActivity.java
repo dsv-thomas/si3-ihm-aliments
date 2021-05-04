@@ -1,8 +1,13 @@
 package com.dsv.td1.si3_ihm_aliments.controller;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,6 +62,9 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
     private ProfileEditFragmentProducer profileEditFragmentProducer;
     private String lacurrentLayout;
+
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+    private TimePickerDialog.OnTimeSetListener timeSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +120,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     }
 
     @Override
-    public void onSubmitaddProductClicked(Producer producer, Bundle bundle) {
+    public void onSubmitAddProductClicked(Producer producer, Bundle bundle) {
         MaraicheFactory maraicheFactory = new MaraicheFactory();
         Model_Producer.getInstance().addProduct(producer, maraicheFactory.buildProduct(bundle.get("editTextProductName").toString(), bundle.get("editTextProductQuantity").toString(), bundle.get("editTextProductPrice").toString(), bundle.get("productImageName").toString()));
         getSupportFragmentManager().popBackStack("stockAddProduct", FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -210,11 +221,14 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm");
 
-        //TODO: Exemple
-        EditText place = popupView.findViewById(R.id.editTextMultiLinePlacePickupPoint);
-        EditText date = popupView.findViewById(R.id.editTextDatePickupPoint);
-        EditText timeS = popupView.findViewById(R.id.editTextTimeStartPickupPoint);
-        EditText timeE = popupView.findViewById(R.id.editTextTimeEndPickupPoint);
+        EditText place = popupView.findViewById(R.id.editTextPlacePickupPoint);
+        TextView date = popupView.findViewById(R.id.editTextDatePickupPoint);
+        TextView timeS = popupView.findViewById(R.id.editTextTimeStartPickupPoint);
+        TextView timeE = popupView.findViewById(R.id.editTextTimeEndPickupPoint);
+
+        SetDateOnClickView(date);
+        SetTimeOnClickView(timeS);
+        SetTimeOnClickView(timeE);
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -282,5 +296,61 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
         } else {
             getSupportFragmentManager().popBackStack();
         }
+    }
+
+    private void SetDateOnClickView(TextView date) {
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        ControllerProducerActivity.this,
+                        R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
+                        dateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+                dialog.show();
+            }
+        });
+
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String dateText = dayOfMonth+"/"+(++month)+"/"+year;
+                date.setText(dateText);
+            }
+        };
+    }
+
+    private void SetTimeOnClickView(TextView time) {
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        String timeText = hourOfDay + ":" + minute;
+                        time.setText(timeText);
+                    }
+                };
+
+                Calendar calendar = Calendar.getInstance();
+                int hour = calendar.get(Calendar.HOUR_OF_DAY);
+                int minute = calendar.get(Calendar.MINUTE);
+
+                TimePickerDialog dialog = new TimePickerDialog(
+                        ControllerProducerActivity.this,
+                        R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
+                        timeSetListener, hour, minute, true
+                );
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.DKGRAY));
+                dialog.show();
+            }
+        });
     }
 }

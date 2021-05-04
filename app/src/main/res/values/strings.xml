@@ -9,4 +9,11 @@
     <string name="title_reservation_producer">Réservations</string>
     <string name="title_stock">Stock</string>
     <string name="trier_par">Trier par :</string>
+    <string name="emplacement">Emplacement</string>
+    <string name="confirm">Valider</string>
+    <string name="date">Date</string>
+    <string name="starting_time">Heure de debut</string>
+    <string name="ending_time">Heure de fin</string>
+    <string name="new_pickup_point">Nouveau point de retrait</string>
+    <string name="pickup_adress">Adresse de retrait</string>
 </resources>

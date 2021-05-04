@@ -13,7 +13,7 @@
         android:layout_centerInParent="true"
         android:layout_margin="30dp"
         android:layout_marginTop="32dp"
-        android:text="Nouveau point de retrait"
+        android:text="@string/new_pickup_point"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
@@ -25,56 +25,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Valider"
+        android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTimeEndPickupPoint" />
 
     <EditText
-        android:id="@+id/editTextMultiLinePlacePickupPoint"
+        android:id="@+id/editTextPlacePickupPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        android:hint="Adresse de retrait"
+        android:hint="@string/pickup_adress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:autofillHints="@string/emplacement"
+        />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextDatePickupPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:layout_marginTop="16dp"
+        android:hint="@string/date"
         android:ems="10"
-        android:inputType="date"
-        android:hint="Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextMultiLinePlacePickupPoint" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPlacePickupPoint" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextTimeStartPickupPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:layout_marginTop="16dp"
+        android:hint="@string/starting_time"
         android:ems="10"
-        android:inputType="time"
-        android:hint="Heure de début"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDatePickupPoint" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextTimeEndPickupPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:layout_marginTop="16dp"
+        android:hint="@string/ending_time"
         android:ems="10"
-        android:inputType="time"
-        android:hint="Heure de fin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTimeStartPickupPoint" />

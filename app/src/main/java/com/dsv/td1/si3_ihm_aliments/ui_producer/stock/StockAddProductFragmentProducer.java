@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
@@ -34,7 +35,7 @@ import java.io.OutputStream;
 import java.util.UUID;
 
 
-public class StockAddProductFragmentProducer extends androidx.fragment.app.Fragment implements IPermissionRequest {
+public class StockAddProductFragmentProducer extends Fragment implements IPermissionRequest {
 
     private Producer producer;
     private IProducerListener listener;
@@ -100,7 +101,7 @@ public class StockAddProductFragmentProducer extends androidx.fragment.app.Fragm
                 bundle.putString("editTextProductPrice", editTextProductPrice.getText().toString());
                 bundle.putString("productImageName", imageName);
 
-                listener.onSubmitaddProductClicked(producer, bundle);
+                listener.onSubmitAddProductClicked(producer, bundle);
             }
         });
         return root;

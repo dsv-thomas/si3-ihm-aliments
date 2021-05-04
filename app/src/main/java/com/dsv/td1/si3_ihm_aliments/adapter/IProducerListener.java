@@ -18,7 +18,7 @@ public interface IProducerListener {
 
     void onAddProductClicked();
 
-    void onSubmitaddProductClicked(Producer producer, Bundle bundle);
+    void onSubmitAddProductClicked(Producer producer, Bundle bundle);
 
     void onButtonShowPopupAddPickupPointClick(View view);
 

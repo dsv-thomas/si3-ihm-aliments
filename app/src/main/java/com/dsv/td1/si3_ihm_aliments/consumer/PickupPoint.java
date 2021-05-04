@@ -50,9 +50,8 @@ public class PickupPoint {
     }
 
     public String getSchedule() {
-        String schedule = new String();
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm", Locale.FRANCE);
-        schedule = "De "+ simpleDateFormat1.format(scheduleStart) + " à " + simpleDateFormat1.format(scheduleEnd);
+        String schedule = "De " + simpleDateFormat1.format(scheduleStart) + " à " + simpleDateFormat1.format(scheduleEnd);
         return schedule;
     }
 
