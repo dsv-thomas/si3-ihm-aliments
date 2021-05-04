@@ -38,6 +38,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:hint="Adresse de retrait"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -49,6 +50,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="date"
+        android:hint="Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextMultiLinePlacePickupPoint" />
@@ -60,6 +62,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="time"
+        android:hint="Heure de début"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDatePickupPoint" />
@@ -71,6 +74,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="time"
+        android:hint="Heure de fin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTimeStartPickupPoint" />

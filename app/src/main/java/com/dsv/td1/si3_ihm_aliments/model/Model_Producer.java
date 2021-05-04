@@ -66,4 +66,12 @@ public class Model_Producer extends Observable {
     public void setProducerList(List<Producer> producerList) {
         Model_Producer.producerList = producerList;
     }
+
+    public List<PickupPoint> getPickupPoints() {
+        List<PickupPoint> pickupPoints = new ArrayList<>();
+        for(Producer producer: producerList) {
+            pickupPoints.addAll(producer.getPickupPoints());
+        }
+        return pickupPoints;
+    }
 }

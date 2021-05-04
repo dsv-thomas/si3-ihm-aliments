@@ -20,7 +20,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.dsv.td1.si3_ihm_aliments.R;
+import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.controller.IPermissionRequest;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
+import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -85,9 +88,14 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         //your items
         ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
 
-        OverlayItem home = new OverlayItem("Votre position", "", new GeoPoint(43.65020, 7.00517));
-        Drawable m = home.getMarker(0);
-        items.add(home); // Lat/Lon decimal degrees
+        for (PickupPoint pickupPoint: Model_Producer.getInstance().getPickupPoints()) {
+            OverlayItem home = new OverlayItem(pickupPoint.getPlace(), pickupPoint.getDate()+pickupPoint.getDate(), pickupPoint.getGeoPoint());
+            Drawable m = home.getMarker(0);
+            items.add(home); // Lat/Lon decimal degrees
+        }
+
+
+
 
         //the Place icons on the map with a click listener
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getActivity().getApplicationContext(), items,

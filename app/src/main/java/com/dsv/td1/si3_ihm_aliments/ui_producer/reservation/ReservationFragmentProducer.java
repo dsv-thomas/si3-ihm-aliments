@@ -34,6 +34,7 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
 
         reservationAdapter.addListener((IAdapterListener) getActivity());
         listView.setAdapter(reservationAdapter);
+
         return root;
     }
 

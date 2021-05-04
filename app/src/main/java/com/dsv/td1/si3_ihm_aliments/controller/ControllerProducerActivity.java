@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,6 +31,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
+import com.dsv.td1.si3_ihm_aliments.helpers.LocalisationFinder;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
@@ -39,11 +41,14 @@ import com.dsv.td1.si3_ihm_aliments.ui_producer.profile.ProfileEditFragmentProdu
 import com.dsv.td1.si3_ihm_aliments.ui_producer.stock.StockAddProductFragmentProducer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONException;
+import org.osmdroid.util.GeoPoint;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ControllerProducerActivity extends AppCompatActivity implements IProducerListener, IAdapterListener, IPermissionRequest {
+public class ControllerProducerActivity extends AppCompatActivity implements IProducerListener, IAdapterListener, IPermissionRequest{
 
     private Bitmap picture;
     private StockAddProductFragmentProducer stockAddProductFragmentProducer;
@@ -233,8 +238,14 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                try {
+                    LocalisationFinder localisationFinder = new LocalisationFinder();
+                    localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
-                Model_Producer.getInstance().addPickupPoint(producer, new PickupPoint(place.getText().toString(), dateFormat, timeFormatS, timeFormatE));
+                Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
                 popupWindow.dismiss();
             }
         });
