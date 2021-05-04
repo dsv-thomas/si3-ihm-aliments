@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class Producer extends User {
     private String place;
     private String pNumber;
-    private boolean isBio;
+    private boolean isBio =false;
     private double averagePrice;
     private int iconNumber;
     private List<Product> proposedProducts = new ArrayList<>();

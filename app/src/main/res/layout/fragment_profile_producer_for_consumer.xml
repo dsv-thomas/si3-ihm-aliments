@@ -48,6 +48,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/bioProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="84dp"
+            android:text="Location"
+            app:layout_constraintStart_toStartOf="@+id/nameProducerPage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/nameProducerPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

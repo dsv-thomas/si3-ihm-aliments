@@ -1,6 +1,7 @@
 package com.dsv.td1.si3_ihm_aliments.ui_producer.profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
     TextView nameProducerProfile;
     TextView locationProducerPage;
     TextView telNumberProducerPage;
+    TextView isbio;
     ImageView imageView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -40,6 +42,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         nameProducerProfile = root.findViewById(R.id.nameProducerProfil);
         locationProducerPage = root.findViewById(R.id.locationProducerPage);
         telNumberProducerPage = root.findViewById(R.id.telNumberProducerPage);
+        isbio = root.findViewById(R.id.buttonBioProfil);
         imageView = root.findViewById(R.id.avatarProducer);
 
 
@@ -56,6 +59,12 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
         locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
         telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+        if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+            isbio.setText("Producteur Bio");
+        } else {
+            isbio.setText("Producteur non Bio");
+        }
+
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
@@ -89,6 +98,11 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
                 nameProducerProfile.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
                 locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
                 telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
+                if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+                    isbio.setText("Producteur Bio");
+                } else {
+                    isbio.setText("Producteur non Bio");
+                }
                 imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
             }
         }

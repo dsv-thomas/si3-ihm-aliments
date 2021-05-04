@@ -54,6 +54,7 @@ public class Model_Producer extends Observable {
         producer.setName(bundle.get("name").toString());
         producer.setpNumber(bundle.get("number").toString());
         producer.setPlace(bundle.get("location").toString());
+        producer.setBio((Boolean) bundle.get("isbio"));
         setChanged();
         notifyObservers("profile");
         //producer.setBio(bundle.get("isBio").toString());

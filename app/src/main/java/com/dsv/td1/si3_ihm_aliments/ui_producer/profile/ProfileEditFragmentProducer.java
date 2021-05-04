@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,22 +91,10 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
 
 
         CheckBox chkEdit = root.findViewById(R.id.buttonBioEdit);
+        chkEdit.setChecked(producer.isBio());
         EditText chkProfile = root.findViewById(R.id.buttonBioProfil);
 
-        chkEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((CheckBox) v).isChecked();
-                // Check which checkbox was clicked
-                if (checked){
-                    producer.setBio(!producer.isBio());
-                    //chkProfile.setText("Certifié Bio");
-                }
-                else{
-                    //chkProfile.setText(" ");
-                }
-            }
-        });
+
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +116,8 @@ public class ProfileEditFragmentProducer extends Fragment implements IPermission
                 bundle.putString("name", editTextName.getText().toString());
                 bundle.putString("location", editTextLocation.getText().toString());
                 bundle.putString("number", editTextTelNumber.getText().toString());
+                bundle.putBoolean("isbio", chkEdit.isChecked());
+                Log.d("STATUS", String.valueOf(chkEdit.isChecked()));
                 listener.onSubmitSettingsClicked(producer, bundle);
             }
         });

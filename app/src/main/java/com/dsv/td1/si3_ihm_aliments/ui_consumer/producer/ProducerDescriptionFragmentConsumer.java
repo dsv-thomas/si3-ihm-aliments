@@ -43,6 +43,12 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
         textViewName.setText(producer.getName());
         TextView textViewLocation = root.findViewById(R.id.locationProducerPage);
         textViewLocation.setText(producer.getPlace());
+        TextView bioProfil = root.findViewById(R.id.bioProfil);
+        if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+            bioProfil.setText("Producteur Bio");
+        } else {
+            bioProfil.setText("Producteur non Bio");
+        }
         ImageView imageView = root.findViewById(R.id.avatarProducer);
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), producer.getUuid().toString()));
         /*

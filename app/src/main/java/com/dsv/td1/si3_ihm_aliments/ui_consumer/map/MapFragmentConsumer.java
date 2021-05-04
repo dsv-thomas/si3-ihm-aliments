@@ -89,7 +89,7 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
 
         for (PickupPoint pickupPoint: Model_Producer.getInstance().getPickupPoints()) {
-            OverlayItem home = new OverlayItem(pickupPoint.getProducer().getName(), pickupPoint.getProducer().getPlace() + " \n "+pickupPoint.getSchedule(), pickupPoint.getGeoPoint());
+            OverlayItem home = new OverlayItem(pickupPoint.getProducer().getName(), pickupPoint.getPlace() + " \n "+pickupPoint.getSchedule(), pickupPoint.getGeoPoint());
             Drawable m = home.getMarker(0);
             items.add(home); // Lat/Lon decimal degrees
         }
