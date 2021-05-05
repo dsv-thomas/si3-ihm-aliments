@@ -252,6 +252,8 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                     timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
                     timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
 
+                    addEventToCalendar(place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
+
                     LocalisationFinder localisationFinder = new LocalisationFinder();
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
                     Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
@@ -354,13 +356,15 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     private void addEventToCalendar(String lieu, Date day, Date timeStart, Date timeEnd) {
         int permissionCheck = ContextCompat.checkSelfPermission(ControllerProducerActivity.this, Manifest.permission.WRITE_CALENDAR);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) return;
-        ContentResolver cr = getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(CalendarContract.Events.DTSTART, timeStart.getTime());
-        values.put(CalendarContract.Events.DTEND, timeEnd.getTime());
-        values.put(CalendarContract.Events.TITLE, "Pickup at " + lieu);
-        values.put(CalendarContract.Events.CALENDAR_ID, 3);
-        values.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/Paris");
-        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+
+        Intent intent = new Intent(Intent.ACTION_INSERT);
+        intent.setData(CalendarContract.Events.CONTENT_URI);
+        intent.putExtra(CalendarContract.Events.TITLE, "Pickup point");
+        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, lieu);
+        intent.putExtra(CalendarContract.Events.ALL_DAY, "false");
+        intent.putExtra(CalendarContract.Events.CALENDAR_TIME_ZONE, "Europe/Paris");
+        intent.putExtra(CalendarContract.Events.DTEND, day.getTime());
+
+        startActivity(intent);
     }
 }
