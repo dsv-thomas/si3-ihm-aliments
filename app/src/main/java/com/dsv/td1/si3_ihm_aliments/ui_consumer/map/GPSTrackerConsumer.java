@@ -16,7 +16,7 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
 public class GPSTrackerConsumer implements LocationListener {
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 1; // 10 metres
     private static final long MIN_TIME_BW_UPDATES = 1; // 1 minute
     private final Context mContext;
     public boolean isGPSEnabled = false;
@@ -32,11 +32,6 @@ public class GPSTrackerConsumer implements LocationListener {
         getLocation();
     }
 
-    /**
-     * Function to get the user's current location
-     *
-     * @return
-     */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
@@ -56,8 +51,7 @@ public class GPSTrackerConsumer implements LocationListener {
                                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         Log.d("Network", "Network");
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
@@ -68,9 +62,7 @@ public class GPSTrackerConsumer implements LocationListener {
                         location = null;
                         if (location == null) {
                             locationManager.requestLocationUpdates(
-                                    LocationManager.GPS_PROVIDER,
-                                    MIN_TIME_BW_UPDATES,
-                                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                                    LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                             Log.d("GPS Enabled", "GPS Enabled");
                             if (locationManager != null) {
                                 location = locationManager
@@ -90,53 +82,6 @@ public class GPSTrackerConsumer implements LocationListener {
         return location;
     }
 
-    /**
-     * Stop using GPS listener Calling this function will stop using GPS in your
-     * app
-     */
-    public void stopUsingGPS() {
-        if (locationManager != null) {
-            locationManager.removeUpdates(GPSTrackerConsumer.this);
-        }
-    }
-
-    /**
-     * Function to get latitude
-     */
-    public double getLatitude() {
-        if (location != null) {
-            latitude = location.getLatitude();
-        }
-
-        // return latitude
-        return latitude;
-    }
-
-    /**
-     * Function to get longitude
-     */
-    public double getLongitude() {
-        if (location != null) {
-            longitude = location.getLongitude();
-        }
-
-        // return longitude
-        return longitude;
-    }
-
-    /**
-     * Function to check GPS/wifi enabled
-     *
-     * @return boolean
-     */
-    public boolean canGetLocation() {
-        return this.canGetLocation;
-    }
-
-    /**
-     * Function to show settings alert dialog On pressing Settings button will
-     * lauch Settings Options
-     */
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         // Setting Dialog Title
@@ -155,7 +100,6 @@ public class GPSTrackerConsumer implements LocationListener {
                     }
                 });
 
-        // on pressing cancel button
         alertDialog.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -163,7 +107,6 @@ public class GPSTrackerConsumer implements LocationListener {
                     }
                 });
 
-        // Showing Alert Message
         alertDialog.show();
     }
 

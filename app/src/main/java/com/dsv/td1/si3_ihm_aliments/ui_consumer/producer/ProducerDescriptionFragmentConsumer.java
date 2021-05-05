@@ -162,7 +162,6 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
         }
     }
 
-    // When results returned
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -51,7 +51,7 @@ public class ProfileEditFragmentConsumer extends Fragment implements IPermission
         View root = inflater.inflate(R.layout.fragment_profile_consumer_edit, container, false);
 
         ContextWrapper cw = new ContextWrapper(getContext());
-        directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();    // path to /data/user/0/etu.demo.camera/app_imageDir
+        directoryName = (cw.getDir("imageDir", Context.MODE_PRIVATE)).getPath();
 
         EditText editText = root.findViewById(R.id.editTextPersonName);
         editText.setText(consumer.getName());

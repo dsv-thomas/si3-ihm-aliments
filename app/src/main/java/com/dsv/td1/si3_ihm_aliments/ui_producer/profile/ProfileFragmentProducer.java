@@ -65,7 +65,6 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
             isbio.setText("Producteur non Bio");
         }
 
-
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
         pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getCurrentProducer().getPickupPoints());
@@ -80,8 +79,6 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
                 listener.onButtonShowPopupAddPickupPointClick(getView());
             }
         });
-        //pickupPointAdapter.addListener((IConsumerAdapterListener) getContext());
-
 
         return root;
     }

@@ -62,6 +62,7 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
         IMapController mapController;
 
         GPSTrackerConsumer mGPS = new GPSTrackerConsumer(getContext());
+        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
 
         assert getActivity() != null;
         map = root.findViewById(R.id.map);
@@ -77,6 +78,9 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 4000, 4000, mGPS);
             GeoPoint startPoint = new GeoPoint(mGPS.getLocation().getLatitude(), mGPS.getLocation().getLongitude());
             mapController.setCenter(startPoint);
+            items.clear();
+            OverlayItem home = new OverlayItem("Vous etes ici","", startPoint);
+            items.add(home);
 
         } else {
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
@@ -84,17 +88,15 @@ public class MapFragmentConsumer extends Fragment implements IPermissionRequest 
             }
         }
 
-        //create a new item to draw on the map
-        //your items
-        ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+
+
 
         for (PickupPoint pickupPoint: Model_Producer.getInstance().getPickupPoints()) {
-            OverlayItem home = new OverlayItem(pickupPoint.getProducer().getName(), pickupPoint.getPlace() + " \n "+pickupPoint.getSchedule(), pickupPoint.getGeoPoint());
+            OverlayItem home = new OverlayItem(pickupPoint.getProducer().getName(), pickupPoint.getPlace() + " \n "+pickupPoint.getDate() + " | " +pickupPoint.getSchedule(), pickupPoint.getGeoPoint());
             Drawable m = home.getMarker(0);
-            items.add(home); // Lat/Lon decimal degrees
+            items.add(home);
         }
 
-        //the Place icons on the map with a click listener
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getActivity().getApplicationContext(), items,
                 new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
                     @Override
