@@ -43,10 +43,22 @@ public class PickupPoint {
         return place;
     }
 
-    public String getDate() {
+    public String getDateString() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         return simpleDateFormat.format(date) ;
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public Date getTimeStart() {
+        return this.scheduleStart;
+    }
+
+    public Date getTimeEnd() {
+        return this.scheduleEnd;
     }
 
     public String getSchedule() {

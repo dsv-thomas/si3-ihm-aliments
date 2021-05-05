@@ -46,6 +46,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IProducerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.factory.MaraicheFactory;
+import com.dsv.td1.si3_ihm_aliments.helpers.CalendarHelper;
 import com.dsv.td1.si3_ihm_aliments.helpers.LocalisationFinder;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
@@ -252,7 +253,11 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                     timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
                     timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
 
-                    addEventToCalendar(place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
+                    Intent calendarIntent  = CalendarHelper.addEventToCalendar(
+                            ControllerProducerActivity.this, place.getText().toString(),
+                            dateFormat, timeFormatS, timeFormatE);
+
+                    startActivity(calendarIntent);
 
                     LocalisationFinder localisationFinder = new LocalisationFinder();
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
@@ -267,9 +272,6 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
 
             }
         });
-
-        ActivityCompat.requestPermissions(ControllerProducerActivity.this,
-                new String[]{Manifest.permission.WRITE_CALENDAR}, IPermissionRequest.CAL_WRITE_REQ);
     }
 
     @Override
@@ -351,20 +353,5 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 dialog.show();
             }
         });
-    }
-
-    private void addEventToCalendar(String lieu, Date day, Date timeStart, Date timeEnd) {
-        int permissionCheck = ContextCompat.checkSelfPermission(ControllerProducerActivity.this, Manifest.permission.WRITE_CALENDAR);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) return;
-
-        Intent intent = new Intent(Intent.ACTION_INSERT);
-        intent.setData(CalendarContract.Events.CONTENT_URI);
-        intent.putExtra(CalendarContract.Events.TITLE, "Pickup point");
-        intent.putExtra(CalendarContract.Events.EVENT_LOCATION, lieu);
-        intent.putExtra(CalendarContract.Events.ALL_DAY, "false");
-        intent.putExtra(CalendarContract.Events.CALENDAR_TIME_ZONE, "Europe/Paris");
-        intent.putExtra(CalendarContract.Events.DTEND, day.getTime());
-
-        startActivity(intent);
     }
 }

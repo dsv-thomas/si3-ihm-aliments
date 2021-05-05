@@ -37,6 +37,7 @@ import com.dsv.td1.si3_ihm_aliments.adapter.IConsumerListener;
 import com.dsv.td1.si3_ihm_aliments.consumer.Consumer;
 import com.dsv.td1.si3_ihm_aliments.consumer.PickupPoint;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
+import com.dsv.td1.si3_ihm_aliments.helpers.CalendarHelper;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Consumer;
 import com.dsv.td1.si3_ihm_aliments.model.Model_Producer;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
@@ -134,7 +135,14 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
             public void onClick(View v) {
                 Consumer consumer = Model_Consumer.getInstance().getConsumerList().get(0);
 
-                Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), (PickupPoint) spinner.getSelectedItem()));
+                PickupPoint pickupPoint = (PickupPoint) spinner.getSelectedItem();
+                Model_Consumer.getInstance().addProductForReservation(consumer, new Reservation(consumer, producer, product, numberPicker.getValue(), pickupPoint));
+
+                startActivity(CalendarHelper.addEventToCalendar(
+                        ControllerConsumerActivity.this,
+                        pickupPoint.getPlace(), pickupPoint.getDate(),
+                        pickupPoint.getTimeStart(), pickupPoint.getTimeEnd(),
+                        numberPicker.getValue() + "Kg de" + product.getName() + " a récupérer."));
 
                 String title = spinner.getSelectedItem().toString();
                 String message = "Nouvelle réservation enregistrée";

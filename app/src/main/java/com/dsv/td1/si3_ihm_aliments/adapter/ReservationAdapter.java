@@ -1,8 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import com.dsv.td1.si3_ihm_aliments.R;
 import com.dsv.td1.si3_ihm_aliments.consumer.Reservation;
 import com.dsv.td1.si3_ihm_aliments.helpers.ImagesHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReservationAdapter extends BaseAdapter {
@@ -74,7 +71,7 @@ public class ReservationAdapter extends BaseAdapter {
         totalPrice.setText(String.valueOf(countTotalPrice));
         place.setText(listView.get(position).getPickupPoint().getPlace());
 
-        date.setText(listView.get(position).getPickupPoint().getDate().toString());
+        date.setText(listView.get(position).getPickupPoint().getDateString().toString());
         time.setText(listView.get(position).getPickupPoint().getSchedule().toString());
 
         imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(contexte, ImagesHelper.getDirName(contexte), listView.get(position).getProduct().getImageName()));

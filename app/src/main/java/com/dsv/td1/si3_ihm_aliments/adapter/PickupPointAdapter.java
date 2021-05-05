@@ -1,7 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public class PickupPointAdapter extends BaseAdapter {
         TextView schedule = maVue.findViewById(R.id.schedulePickupPointReservation);
 
         place.setText(listView.get(position).getPlace());
-        date.setText(listView.get(position).getDate().toString());
+        date.setText(listView.get(position).getDateString().toString());
         schedule.setText(listView.get(position).getSchedule().toString());
 
         return maVue;
