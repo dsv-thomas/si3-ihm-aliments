@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_reservation_producer"
-        android:icon="@drawable/ic_agriculture_black_18dp"
+        android:icon="@drawable/reservation"
         android:title="@string/title_reservation_producer" />
 
     <item
