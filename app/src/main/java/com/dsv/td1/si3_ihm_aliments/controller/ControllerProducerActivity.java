@@ -1,14 +1,19 @@
 package com.dsv.td1.si3_ihm_aliments.controller;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,6 +31,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -163,7 +170,6 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                     stockAddProductFragmentProducer.saveToInternalStorage(picture);
                     if (stockAddProductFragmentProducer != null) {
                         stockAddProductFragmentProducer.saveToInternalStorage(picture);
-                        ;
                     } else if (profileEditFragmentProducer != null) {
                         profileEditFragmentProducer.saveToInternalStorage(picture);
                     }
@@ -245,6 +251,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                     dateFormat = simpleDateFormat.parse(date.getText().toString());
                     timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
                     timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
+
                     LocalisationFinder localisationFinder = new LocalisationFinder();
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
                     Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
@@ -259,13 +266,8 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
             }
         });
 
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                return true;
-            }
-        });
+        ActivityCompat.requestPermissions(ControllerProducerActivity.this,
+                new String[]{Manifest.permission.WRITE_CALENDAR}, IPermissionRequest.CAL_WRITE_REQ);
     }
 
     @Override
@@ -347,5 +349,18 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 dialog.show();
             }
         });
+    }
+
+    private void addEventToCalendar(String lieu, Date day, Date timeStart, Date timeEnd) {
+        int permissionCheck = ContextCompat.checkSelfPermission(ControllerProducerActivity.this, Manifest.permission.WRITE_CALENDAR);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) return;
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.DTSTART, timeStart.getTime());
+        values.put(CalendarContract.Events.DTEND, timeEnd.getTime());
+        values.put(CalendarContract.Events.TITLE, "Pickup at " + lieu);
+        values.put(CalendarContract.Events.CALENDAR_ID, 3);
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/Paris");
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
     }
 }
