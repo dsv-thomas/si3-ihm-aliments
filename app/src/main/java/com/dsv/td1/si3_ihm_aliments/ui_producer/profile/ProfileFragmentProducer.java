@@ -55,11 +55,11 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
             }
         });
 
-        nameProducerProfile.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
-        locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
-        telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
-        if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+        nameProducerProfile.setText(Model_Producer.getInstance().getCurrentProducer().getName());
+        locationProducerPage.setText(Model_Producer.getInstance().getCurrentProducer().getPlace());
+        telNumberProducerPage.setText(Model_Producer.getInstance().getCurrentProducer().getpNumber());
+        imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getCurrentProducer().getUuid().toString()));
+        if(Model_Producer.getInstance().getCurrentProducer().isBio()) {
             isbio.setText("Producteur Bio");
         } else {
             isbio.setText("Producteur non Bio");
@@ -68,7 +68,7 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
 
         ListView listView = root.findViewById(R.id.listPickupPointProducer);
 
-        pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+        pickupPointAdapter = new PickupPointAdapter(getContext(), Model_Producer.getInstance().getCurrentProducer().getPickupPoints());
 
         listView.setAdapter(pickupPointAdapter);
 
@@ -90,20 +90,20 @@ public class ProfileFragmentProducer extends Fragment implements Observer {
     public void update(Observable o, Object arg) {
         if(arg != null) {
             if(arg.toString().contains("addpickupoint")) {
-                pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+                pickupPointAdapter.updateList(Model_Producer.getInstance().getCurrentProducer().getPickupPoints());
                 pickupPointAdapter.notifyDataSetChanged();
             }
             //UpdateProfile
             if(arg.toString().contains("profile")) {
-                nameProducerProfile.setText(Model_Producer.getInstance().getProducerList().get(0).getName());
-                locationProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getPlace());
-                telNumberProducerPage.setText(Model_Producer.getInstance().getProducerList().get(0).getpNumber());
-                if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+                nameProducerProfile.setText(Model_Producer.getInstance().getCurrentProducer().getName());
+                locationProducerPage.setText(Model_Producer.getInstance().getCurrentProducer().getPlace());
+                telNumberProducerPage.setText(Model_Producer.getInstance().getCurrentProducer().getpNumber());
+                if(Model_Producer.getInstance().getCurrentProducer().isBio()) {
                     isbio.setText("Producteur Bio");
                 } else {
                     isbio.setText("Producteur non Bio");
                 }
-                imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getProducerList().get(0).getUuid().toString()));
+                imageView.setImageBitmap(ImagesHelper.loadImageFromStorage(getActivity(), ImagesHelper.getDirName(getActivity()), Model_Producer.getInstance().getCurrentProducer().getUuid().toString()));
             }
         }
     }

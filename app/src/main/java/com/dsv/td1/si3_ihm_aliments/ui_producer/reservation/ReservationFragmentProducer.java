@@ -29,7 +29,7 @@ public class ReservationFragmentProducer extends androidx.fragment.app.Fragment 
         View root = inflater.inflate(R.layout.fragment_reservation_producer, container, false);
         Model_Consumer.getInstance().addObserver(this);
 
-        reservationAdapter = new ReservationAdapter(this.getContext(), Model_Consumer.getInstance().reservationsForProducer(Model_Producer.getInstance().getProducerList().get(0)));
+        reservationAdapter = new ReservationAdapter(this.getContext(), Model_Consumer.getInstance().reservationsForProducer(Model_Producer.getInstance().getCurrentProducer()));
         ListView listView = root.findViewById(R.id.listViewReservationProducer);
 
         reservationAdapter.addListener((IAdapterListener) getActivity());

@@ -55,7 +55,7 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
         TextView textViewLocation = root.findViewById(R.id.locationProducerPage);
         textViewLocation.setText(producer.getPlace());
         TextView bioProfil = root.findViewById(R.id.bioProfil);
-        if(Model_Producer.getInstance().getProducerList().get(0).isBio()) {
+        if(Model_Producer.getInstance().getCurrentProducer().isBio()) {
             bioProfil.setText("Producteur Bio");
         } else {
             bioProfil.setText("Producteur non Bio");
@@ -104,10 +104,10 @@ public class ProducerDescriptionFragmentConsumer extends Fragment implements Obs
 
     @Override
     public void update(Observable o, Object arg) {
-        productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
+        productAdapter.updateList(Model_Producer.getInstance().getCurrentProducer().getProposedProducts());
         productAdapter.notifyDataSetChanged();
 
-        pickupPointAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints());
+        pickupPointAdapter.updateList(Model_Producer.getInstance().getCurrentProducer().getPickupPoints());
         pickupPointAdapter.notifyDataSetChanged();
     }
 

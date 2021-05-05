@@ -46,14 +46,14 @@ public class StockFragmentProducer extends Fragment implements Observer {
     }
 
     public void stockListView() {
-        productAdapter = new ProductAdapter(getContext(), Model_Producer.getInstance().getProducerList().get(0).getProposedProducts(), Model_Producer.getInstance().getProducerList().get(0));
+        productAdapter = new ProductAdapter(getContext(), Model_Producer.getInstance().getCurrentProducer().getProposedProducts(), Model_Producer.getInstance().getCurrentProducer());
         productAdapter.addListener((IAdapterListener) getActivity());
         listView1.setAdapter(productAdapter);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        productAdapter.updateList(Model_Producer.getInstance().getProducerList().get(0).getProposedProducts());
+        productAdapter.updateList(Model_Producer.getInstance().getCurrentProducer().getProposedProducts());
         productAdapter.notifyDataSetChanged();
     }
 }

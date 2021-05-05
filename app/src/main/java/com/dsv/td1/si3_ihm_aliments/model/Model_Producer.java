@@ -15,6 +15,7 @@ public class Model_Producer extends Observable {
 
     private static List<Producer> producerList = new ArrayList<>();
     private static Model_Producer instance = null;
+    private Producer currentProducer;
 
 
     private Model_Producer() {
@@ -23,7 +24,8 @@ public class Model_Producer extends Observable {
         MaraicheFactory maraicheFactory = new MaraicheFactory();
 
         addProducer(maraicheFactory.buildProducer("Michel", "Rue de l'eau", "0985758452", true));
-        addProducer(maraicheFactory.buildProducer("Alex", "Chemin du palmier", "0954268522", false));
+        addProducer(maraicheFactory.buildProducer("Robert", "Chemin du palmier", "0954268522", false));
+        currentProducer = producerList.get(0);
     }
 
     public static Model_Producer getInstance() {
@@ -74,5 +76,9 @@ public class Model_Producer extends Observable {
             pickupPoints.addAll(producer.getPickupPoints());
         }
         return pickupPoints;
+    }
+
+    public Producer getCurrentProducer() {
+        return currentProducer;
     }
 }

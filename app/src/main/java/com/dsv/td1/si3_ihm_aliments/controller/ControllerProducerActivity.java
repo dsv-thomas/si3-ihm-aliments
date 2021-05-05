@@ -111,7 +111,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     @Override
     public void onSettingsClicked() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        profileEditFragmentProducer = new ProfileEditFragmentProducer(Model_Producer.getInstance().getProducerList().get(0));
+        profileEditFragmentProducer = new ProfileEditFragmentProducer(Model_Producer.getInstance().getCurrentProducer());
         ft.add(R.id.nav_host_producer_fragment, profileEditFragmentProducer);
         ft.addToBackStack("profileEdit");
         ft.commit();
@@ -120,7 +120,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
     @Override
     public void onAddProductClicked() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        stockAddProductFragmentProducer = new StockAddProductFragmentProducer(Model_Producer.getInstance().getProducerList().get(0));
+        stockAddProductFragmentProducer = new StockAddProductFragmentProducer(Model_Producer.getInstance().getCurrentProducer());
         ft.add(R.id.nav_host_producer_fragment, stockAddProductFragmentProducer);
         ft.addToBackStack("stockAddProduct");
         ft.commit();
@@ -243,7 +243,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
             @Override
             public void onClick(View v) {
 
-                Producer producer = Model_Producer.getInstance().getProducerList().get(0);
+                Producer producer = Model_Producer.getInstance().getCurrentProducer();
                 Date dateFormat;
                 Date timeFormatS;
                 Date timeFormatE;
@@ -256,7 +256,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
 
                     LocalisationFinder localisationFinder = new LocalisationFinder();
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
-                    Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getProducerList().get(0).getPickupPoints().size()));
+                    Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getCurrentProducer().getPickupPoints().size()));
                     popupWindow.dismiss();
                 } catch (ParseException | JSONException e) {
                     Toast.makeText(ControllerProducerActivity.this,
