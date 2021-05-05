@@ -102,6 +102,7 @@ public class StockAddProductFragmentProducer extends Fragment implements IPermis
                 bundle.putString("productImageName", imageName);
 
                 listener.onSubmitAddProductClicked(producer, bundle);
+                producer.updateAveragePrice();
             }
         });
         return root;

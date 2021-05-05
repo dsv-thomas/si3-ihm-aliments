@@ -50,9 +50,9 @@
         android:id="@+id/priceIconProducer"
         android:layout_width="65dp"
         android:layout_height="51dp"
-        android:layout_marginStart="108dp"
+        android:layout_marginStart="268dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/placeProducer"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

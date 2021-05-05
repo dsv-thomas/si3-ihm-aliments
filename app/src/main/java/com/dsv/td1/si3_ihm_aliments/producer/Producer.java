@@ -32,6 +32,8 @@ public abstract class Producer extends User {
         this.pNumber = pNumber;
         this.isBio = isBio;
         this.proposedProducts = proposedProducts;
+        this.averagePrice = 0.0;
+        updateIconNumber();
     }
 
     public Producer(String name, String place, String pNumber, boolean isBio, List<Product> proposedProducts, List<PickupPoint> pickupPoints) {
@@ -41,6 +43,8 @@ public abstract class Producer extends User {
         this.isBio = isBio;
         this.proposedProducts = proposedProducts;
         this.pickupPoints = pickupPoints;
+        this.averagePrice = 0.0;
+        updateIconNumber();
     }
 
     public List<Product> getProposedProducts() {

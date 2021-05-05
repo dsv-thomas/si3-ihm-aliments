@@ -56,6 +56,8 @@ public class ProducerFragmentConsumer extends Fragment implements Observer {
 
                 if(selectedSortType.equals("Nom")) {
                     Collections.sort(initialList, (p1, p2) -> p1.getName().compareTo(p2.getName()));
+                } else if(selectedSortType.equals("Prix")) {
+                    Collections.sort(initialList, (p1, p2) -> Double.compare(p1.getAveragePrice(), (p2.getAveragePrice())));
                 }
 
                 Model_Producer.getInstance().setProducerList(initialList);
