@@ -140,8 +140,8 @@ public class ControllerConsumerActivity extends AppCompatActivity implements ICo
 
                 startActivity(CalendarHelper.addEventToCalendar(
                         ControllerConsumerActivity.this,
-                        pickupPoint.getPlace(), pickupPoint.getDate(),
-                        pickupPoint.getTimeStart(), pickupPoint.getTimeEnd(),
+                        pickupPoint.getPlace(),
+                        pickupPoint.getStartDate(), pickupPoint.getEndDate(),
                         numberPicker.getValue() + "Kg de" + product.getName() + " a récupérer."));
 
                 String title = spinner.getSelectedItem().toString();

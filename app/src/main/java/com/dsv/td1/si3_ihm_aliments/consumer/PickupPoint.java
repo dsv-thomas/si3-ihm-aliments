@@ -1,5 +1,6 @@
 package com.dsv.td1.si3_ihm_aliments.consumer;
 
+import com.dsv.td1.si3_ihm_aliments.helpers.CalendarHelper;
 import com.dsv.td1.si3_ihm_aliments.producer.Producer;
 
 import org.osmdroid.util.GeoPoint;
@@ -44,22 +45,21 @@ public class PickupPoint {
     }
 
     public String getDateString() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        return simpleDateFormat.format(date) ;
+        return CalendarHelper.formatDate(this.date);
     }
 
     public Date getDate() {
         return this.date;
     }
 
-    public Date getTimeStart() {
-        return this.scheduleStart;
+    public Date getStartDate() {
+        return CalendarHelper.dayAndTime(getDateString(), CalendarHelper.formatTime(scheduleStart));
     }
 
-    public Date getTimeEnd() {
-        return this.scheduleEnd;
+    public Date getEndDate() {
+        return CalendarHelper.dayAndTime(getDateString(), CalendarHelper.formatTime(scheduleEnd));
     }
+
 
     public String getSchedule() {
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("HH:mm", Locale.FRANCE);

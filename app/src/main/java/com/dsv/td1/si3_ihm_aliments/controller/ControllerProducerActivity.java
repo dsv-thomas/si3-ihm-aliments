@@ -225,9 +225,6 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
 
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm");
-
         EditText place = popupView.findViewById(R.id.editTextPlacePickupPoint);
         TextView date = popupView.findViewById(R.id.editTextDatePickupPoint);
         TextView timeS = popupView.findViewById(R.id.editTextTimeStartPickupPoint);
@@ -249,13 +246,20 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                 Date timeFormatS;
                 Date timeFormatE;
                 try {
-                    dateFormat = simpleDateFormat.parse(date.getText().toString());
-                    timeFormatS = simpleTimeFormat.parse(timeS.getText().toString());
-                    timeFormatE = simpleTimeFormat.parse(timeE.getText().toString());
+                    String dateText = date.getText().toString();
+                    String startTimeText = timeS.getText().toString();
+                    String endTimeText = timeE.getText().toString();
+
+                    dateFormat = CalendarHelper.day(dateText);
+                    timeFormatS = CalendarHelper.time(startTimeText);
+                    timeFormatE = CalendarHelper.time(endTimeText);
+
+                    Date startDate = CalendarHelper.dayAndTime(dateText, startTimeText);
+                    Date endDate = CalendarHelper.dayAndTime(dateText, startTimeText);
 
                     Intent calendarIntent  = CalendarHelper.addEventToCalendar(
                             ControllerProducerActivity.this, place.getText().toString(),
-                            dateFormat, timeFormatS, timeFormatE);
+                            startDate, endDate);
 
                     startActivity(calendarIntent);
 
@@ -263,7 +267,7 @@ public class ControllerProducerActivity extends AppCompatActivity implements IPr
                     localisationFinder.findLocation(getCacheDir(), producer, place.getText().toString(), dateFormat, timeFormatS, timeFormatE);
                     Log.d("OKOKOK", String.valueOf(Model_Producer.getInstance().getCurrentProducer().getPickupPoints().size()));
                     popupWindow.dismiss();
-                } catch (ParseException | JSONException e) {
+                } catch (JSONException e) {
                     Toast.makeText(ControllerProducerActivity.this,
                             "Veuillez correctement renseigner tous les champs", Toast.LENGTH_SHORT).show();
                 }
