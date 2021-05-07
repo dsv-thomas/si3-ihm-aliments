@@ -7,6 +7,7 @@ Le sujet abordé par ce projet est celui des aliments et plus précisément les 
 Nous avons 2 types d'utilisateurs ici :
 - Les producteurs qui veulenet gagner en visibilité 
 - Les clients qui veulent responsabiliser leur consommation en consommant local et faire fonctionner les commerces de leur région.
+
 Ces deux types d'utilisateurs ont des besoins spécifiques et auront donc chacun des interfaces dédiées dans l'application
 
 ## Tâches effectuables dans l'application 
