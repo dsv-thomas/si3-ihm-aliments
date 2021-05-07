@@ -25,6 +25,7 @@ Ces deux types d'utilisateurs ont des besoins spécifiques et auront donc chacun
 - Modifier son profil
 - Ajouter une photo à son profil
 - Visualiser les producteurs de son secteur sous forme de liste
+- Trier les producteurs de la liste selon leur nom ou prix de vente moyen
 - Voir l’emplacement de ces agriculteurs sur une carte
 - Consulter les produits proposés par un agriculteur
 - Réserver des produits chez un agriculteur
